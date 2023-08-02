@@ -1,0 +1,91 @@
+@extends('layouts.app-master')
+
+@section('template_title')
+    {{ __('Create') }} Property
+@endsection
+
+@section('content')
+
+
+           
+ 
+                        <form method="POST" action="{{ route('properties.store') }}"  role="form" enctype="multipart/form-data">
+                            @csrf
+
+                             @include('property.form')
+                         
+
+                        </form>
+                        
+                        
+                        
+                        
+                      
+@endsection
+
+@section('styles')
+
+
+        <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+      
+@endsection
+
+
+
+
+@section('scripts')
+
+         
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+  <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+ 
+ 
+    
+                        
+                        <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
+                        
+                        
+                          <script>
+                            
+  var input = document.querySelector('.tags');
+ 
+  
+  
+
+ 
+
+
+
+   var  tags_values= [ " "];
+
+  
+  
+  
+
+ 
+    // init Tagify script on the above inputs
+    tagify = new Tagify(input, {
+      whitelist: tags_values,
+      
+      dropdown: {
+               
+        classname: "tags-look",  
+        enabled: 0,             // <- show suggestions on focus
+        closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+      }
+    })
+    
+    
+    
+    
+    
+ var allEditors = document.querySelectorAll('.editor');
+                           
+                           
+        for (var i = 0; i < allEditors.length; ++i) {
+          ClassicEditor.create(allEditors[i]);
+        }
+        
+         
+                </script> 
+@endsection

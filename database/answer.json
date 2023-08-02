@@ -1,0 +1,55 @@
+{
+    "fields": [
+     
+        {
+            "name": "content",
+            "type": "text"
+        },
+        {
+            "name": "attachment",
+            "type": "file"
+        },
+        {
+            "name": "category",
+            "type": "select",
+            "options": {
+                "technical": "Tichnical",
+                "Billing": "Billing" 
+            }
+        },
+        {
+            "name": "user_id",
+            "type": "integer#unsigned"
+        },
+        {
+            "name": "ticket_id",
+            "type": "integer#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "user_id",
+            "references": "id",
+            "on": "users",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\Models\\User"
+        },
+        {
+            "name": "ticket",
+            "type": "belongsTo",
+            "class": "App\\Models\\Ticket"
+        }
+    ],
+    "validations": [
+        {
+            "field": "title",
+            "rules": "required|max:50"
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+       <form method="POST" action="{{ route('properties.update', $property->id) }}"  role="form" enctype="multipart/form-data">
+                            {{ method_field('PATCH') }}
+                            @csrf
+                            
+                            
+                            
+                            
+  
+									   <div class="mb-3">
+  <label for="video_url" class="form-label">Set Video</label>
+  <input type="text" class="form-control" id="video_url" value="{{ $property->video_url }}" name="video_url"  >
+</div>
+ 
+ 
+ 
+ 
+                           <div class="box-footer mt20">
+        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+    </div>
+    
+    
+ </form>
+ 
