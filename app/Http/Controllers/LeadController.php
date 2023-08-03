@@ -287,6 +287,74 @@ abort(403);
             ->with('success', 'Lead updated successfully');
     }
 
+
+
+
+
+
+
+
+
+
+ /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Lead $lead
+     * @return \Illuminate\Http\Response
+     */
+    public function set_lead_tags(Request $request, Lead $lead)
+    {
+       // request()->validate(Lead::$rules);
+
+
+ $user=Auth::user(); 
+$permission=$user->can('update' ,$lead);
+ 
+ if(!$permission) 
+abort(403);
+
+
+
+        $lead->tags=$request->tags;
+        
+        $lead->save();
+        
+        
+
+        return redirect()->route('leads.index')
+            ->with('success', 'Lead updated successfully');
+    }
+
+   /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Lead $lead
+     * @return \Illuminate\Http\Response
+     */
+    public function set_lead_status(Request $request, Lead $lead)
+    {
+       // request()->validate(Lead::$rules);
+
+
+ $user=Auth::user(); 
+$permission=$user->can('update' ,$lead);
+ 
+ if(!$permission) 
+abort(403);
+
+
+
+        $lead->status=$request->status;
+        
+        $lead->save();
+        
+        
+
+        return redirect()->route('leads.index')
+            ->with('success', 'Lead updated successfully');
+    }
     /**
      * @param Lead $lead 
      * @return \Illuminate\Http\RedirectResponse

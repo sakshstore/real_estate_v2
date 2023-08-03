@@ -28,7 +28,7 @@ use App\Http\Controllers\BulkMessageController;
 
 
 use App\Http\Controllers\TestimonialController;
-use App\Http\Controllers\VendorController;
+use App\Http\Controllers\BrokerController;
 
 use App\Http\Controllers\PostController;
 
@@ -73,13 +73,13 @@ Route::get('/contact_us', [PageController::class, 'contact_us'])->name('contact_
   Route::get('blog/{post}',[ PostController::class,'get_post'])->name("get_post") ;
     
  
-Route::get('register_as_vendor',[ VendorController::class,'register_as_vendor'])->name("register_as_vendor") ;
+Route::get('register_as_broker',[ BrokerController::class,'register_as_broker'])->name("register_as_broker") ;
 
-  Route::get('broker/{email}',[ VendorController::class,'get_vendor'])->name("get_vendor") ;
+  Route::get('broker/{email}',[ BrokerController::class,'get_broker'])->name("get_broker") ;
     
  
 
-Route::post('register_as_vendor_post',[ VendorController::class,'register_as_vendor_post'])->name("register_as_vendor_post") ;
+Route::post('register_as_broker_post',[ BrokerController::class,'register_as_broker_post'])->name("register_as_broker_post") ;
 
 
     
@@ -108,7 +108,7 @@ Route::post('book_a_private_tour', [LeadController::class, 'book_a_private_tour'
 
 
 
-Route::get('our_brokers', [VendorController::class, 'our_brokers']   )->name('our_brokers'); 
+Route::get('our_brokers', [BrokerController::class, 'our_brokers']   )->name('our_brokers'); 
 
 
 
@@ -140,6 +140,13 @@ Route::middleware(['role:admin'])->group(function () {
     
     
  
+
+
+    
+Route::post('/set_lead_status/{lead}', [LeadController::class, 'set_lead_status'])->name('set_lead_status');
+
+    
+Route::post('/set_lead_tags/{lead}', [LeadController::class, 'set_lead_tags'])->name('set_lead_tags');
 
 
     
@@ -260,7 +267,7 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
     Route::resource('teams', TeamController::class) ;
     
-    Route::resource('vendors', VendorController::class) ;
+    Route::resource('brokers', BrokerController::class) ;
     
      
       Route::post('update_avatar/{team}',[ TeamController::class,'update_avatar'])->name("update_avatar") ;
@@ -276,7 +283,7 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
      
      
-      Route::post('update_avatar_vendor/{vendor}',[ VendorController::class,'update_avatar_vendor'])->name("update_avatar_vendor") ;
+      Route::post('update_avatar_broker/{broker}',[ BrokerController::class,'update_avatar_broker'])->name("update_avatar_broker") ;
     
     
      
@@ -285,7 +292,7 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
     
 
-      Route::get('process_vendor_request/{vendor}',[ VendorController::class,'process_vendor_request'])->name("process_vendor_request") ;
+      Route::get('process_broker_request/{broker}',[ BrokerController::class,'process_broker_request'])->name("process_broker_request") ;
     
     
      

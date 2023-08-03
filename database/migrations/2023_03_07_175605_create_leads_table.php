@@ -21,7 +21,9 @@ return new class extends Migration
               $table->string('service_id') ;
                     $table->string('user_id') ;
                        $table->string('ip_address') ;
-                          $table->string('request_url') ;
+                          $table->string('request_url') ;   
+                          $table->string('status') ->nullable() ;
+               ;
             $table->timestamps();
         });
     }

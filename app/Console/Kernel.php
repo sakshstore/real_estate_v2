@@ -10,6 +10,7 @@ use App\Models\MetaApp;
 use App\Models\MassMessage;
 use Illuminate\Support\Facades\Log;
 
+use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
@@ -25,47 +26,7 @@ class Kernel extends ConsoleKernel
     {    
               
         $schedule->call(function () {
-        
-        
-          $from = Carbon::now();
-            $to = Carbon::now()->addMinute();
-               
-            
-             
-            
-            $seconds=60*60*24*1;
-            
-      
- 
-        
-         $credential=[
-    'from_phone_number_id' =>DotenvEditor::getValue('whatsapp_from_phone_number_id'),
-    'access_token' =>       DotenvEditor::getValue('whatsapp_access_token'),
-]; 
- 
- 
-     
-          $massMessage = BulkMessage::whereBetween('scheduled_at', [$from, $to])->first();
-        
-        if($massMessage)
-        {
-    
-        $messages=  get_lead_list_by_tags($massMessage->lead_tags) ;
-        
-        
-
-        foreach($messages as $request){
-             
-            $message=$request->content;
-            $to =$request->phone;
-           
-             send2WappV3($to,$message,$credential); 
-        
-             
-        }
-        }
-        
-        
+         Send_schedules_Wapp_messages(  );
         })->everyMinute();
      
     }

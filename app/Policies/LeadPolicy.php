@@ -59,7 +59,7 @@ class LeadPolicy
     {
         //
         
-        return false;
+        return true;
     }
 
     /**

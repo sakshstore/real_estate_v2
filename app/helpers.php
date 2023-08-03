@@ -4,7 +4,16 @@ use App\Models\Property;
 
 use App\Models\Page;
 
- 
+ use Netflie\WhatsAppCloudApi\WhatsAppCloudApi;
+
+
+use Netflie\WhatsAppCloudApi\Message\Media\LinkID;
+use Netflie\WhatsAppCloudApi\Message\Media\MediaObjectID;
+
+
+ use Netflie\WhatsAppCloudApi\Message\Template\Component;
+use Carbon\Carbon;
+
 
 
 
@@ -205,9 +214,9 @@ return $str.$type;
 }
 
 
-if (! function_exists('get_customer_list_by_tags')) {
+if (! function_exists('get_lead_list_by_tags')) {
 
-  function get_customer_list_by_tags()
+  function get_lead_list_by_tags($tags)
     {
         
         
@@ -219,10 +228,12 @@ if (! function_exists('get_customer_list_by_tags')) {
    $tag_array=explode(",",$tags);
    
    
+ Log::debug("___".__LINE__);
+ 
          
            
            
-           $query=" select * from chat_requests   where   ";
+           $query=" select * from leads   where   ";
            
            
    $i=0;
@@ -231,7 +242,7 @@ if (! function_exists('get_customer_list_by_tags')) {
                 
                 { 
                     if($i==0)
-  $query=  $query . "  (  customer_tags like  '%".$tag."%' ) "  ;
+  $query=  $query . "  (  tags like  '%".$tag."%' ) "  ;
   
   else
   {
@@ -239,7 +250,7 @@ if (! function_exists('get_customer_list_by_tags')) {
       
   
   
-  $query=  $query . " OR   (  customer_tags like  '%".$tag."%'  )"  ;
+  $query=  $query . " OR   (  tags like  '%".$tag."%'  )"  ;
   
   }
   $i++;
@@ -249,10 +260,18 @@ if (! function_exists('get_customer_list_by_tags')) {
                 
                  $query  .=" )  " ; 
             
-             
             
-             $chat_requests = DB::select($query);
+ Log::debug("___".$query);
+  
+ Log::debug("___".__LINE__);
+  
+            
+             $data = DB::select($query);
  
+ Log::debug("___".print_r($data,true));
+  
+        
+        return $data;
         
         
       
@@ -263,4 +282,154 @@ if (! function_exists('get_customer_list_by_tags')) {
     
 
 
+if (! function_exists('Send_schedules_Wapp_messages')) {
+    
+       function Send_schedules_Wapp_messages(  )
+{ 
+         
+        
+          $from = Carbon::now();
+            $to = Carbon::now()->addMinute(111111);
+               
+            
+             
+             
+      
+ 
+        
+         $credential=[
+    'from_phone_number_id' =>DotenvEditor::getValue('WHATSAPP_FROM_PHONE_NUMBER_ID'),
+    'access_token' =>       DotenvEditor::getValue('WHATSAPP_ACCESS_TOKEN'),
+]; 
+ 
+ Log::debug("___".__LINE__);
+ 
+ Log::debug("___".$from);
+ 
+ Log::debug("___".$to);
+ 
+ 
+     
+          $massMessage = BulkMessage::whereBetween('scheduled_at', [$from, $to])->first();        
+          
+ 
+ Log::debug("___".__LINE__);
+ 
+ 
+          Log::debug(print_r($massMessage,true));
+          
+ 
+
+         
+        if($massMessage)
+        {
+    
+        $leads=  get_lead_list_by_tags($massMessage->lead_tags) ;
+           
+ 
+
+          Log::debug(print_r($leads,true));
+          
+ 
+ Log::debug("___".__LINE__);
+
+        foreach($leads as $request){
+             
+            $message=$massMessage->content;
+            $to =$request->phone;
+           
+ 
+ Log::debug("___".__LINE__);
+            // send2WappV3($to,$message,$credential); 
+          //   sendEmail($to,$message,$credential); 
+             sendlog($to,$message,$credential); 
+        
+ 
+ Log::debug("___".__LINE__);
+             
+        }
+        }
+         
+     
+        
+}
+
+}
+
+if (! function_exists('sendlog')) {
+    
+       function sendlog($to,$body,$credential)
+{ 
+    
+       
+ 
+ Log::debug("sendlog___".print_r($to,true)); 
+    
+ 
+ Log::debug("sendlog___".__LINE__); 
+    
+ 
+ 
+ Log::debug("sendlog___".print_r($to,true)); 
+ Log::debug("sendlog___".__LINE__); 
+    
+ 
+ Log::debug("sendlog___".print_r($body,true)); 
+ 
+ Log::debug("sendlog___".__LINE__); 
+    
+ 
+ Log::debug("sendlog___".print_r($credential,true)); 
+ 
+
+ 
+ Log::debug("sendlog___".__LINE__);
+     
+        
+}
+
+
+}
+if (! function_exists('send2WappV3')) {
+    
+       function send2WappV3($to,$body,$credential)
+{ 
+        
+        
+       
+ 
+ Log::debug("___".print_r($to,true)); 
+    
+ 
+ Log::debug("___".__LINE__); 
+    
+ 
+ 
+ Log::debug("___".print_r($to,true)); 
+ Log::debug("___".__LINE__); 
+    
+ 
+ Log::debug("___".print_r($body,true)); 
+ 
+ Log::debug("___".__LINE__); 
+    
+ 
+ Log::debug("___".print_r($credential,true)); 
+ 
+
+ 
+ Log::debug("___".__LINE__);
+ 
+         
+$whatsapp_cloud_api = new WhatsAppCloudApi($credential);
+
+ //$result=$whatsapp_cloud_api->sendTemplate('+'.$to, 'hello_world', 'en_US');  
+ 
+
+$result=$whatsapp_cloud_api->sendTextMessage('+'.$to, $body);
+
+return $result;
+    
+}
+}
 
