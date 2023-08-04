@@ -9,7 +9,7 @@
 
 
 
-   
+   <div id="ajax_response"></div>
                  
                   <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -49,13 +49,10 @@
 
 
 
-
+     <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 
         <link href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet" />
-      
-      
-      
-      
+       
 
         <link href="//cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" rel="stylesheet" />
       
@@ -99,10 +96,7 @@
 <script src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
 <script src="https://cdn.datatables.net/fixedheader/3.4.0/js/dataTables.fixedHeader.min.js"></script>
 <script src="https://cdn.datatables.net/keytable/2.10.0/js/dataTables.keyTable.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-
-
-
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script> 
 
 <script src="https://cdn.datatables.net/scroller/2.2.0/js/dataTables.scroller.min.js"></script>
 <script src="https://cdn.datatables.net/searchbuilder/1.5.0/js/dataTables.searchBuilder.min.js"></script>
@@ -110,8 +104,15 @@
 <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
 <script src="https://cdn.datatables.net/staterestore/1.3.0/js/dataTables.stateRestore.min.js"></script>
  
+ 
+    
+<script src="https://unpkg.com/@yaireo/tagify"></script>
 
 
+  <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+  
+  
+ 
 <script>
      
     $(document).ready( function () {
@@ -131,7 +132,68 @@
 
 
 
-} );
+
+ 
+  var status_tags_input = document.querySelector('.status_tags');
+  
+  var status_tags_values = ["success","in process","ended" ];
+ 
+ 
+  
+    
+  tagify = new Tagify(status_tags_input, {
+ 
+      whitelist: status_tags_values,
+      dropdown: {
+        classname: "tags-look",  
+        enabled: 0,             // <- show suggestions on focus
+        closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+      }
+ 
+    });
+ 
+ 
+
+});
+
+ 
+function set_lead_status11(lead_id,status )
+{
+    
+ 
+   $.ajaxSetup(
+   {
+      headers:
+      {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+   $.ajax(
+   {
+      url: " lead_id=" + lead_id + '&status='+status,
+      type: "post",
+      dataType: 'json',
+      success: function(res)
+      {
+          
+          
+          console.log(res);
+          console.log(res.contents);
+          $('#ajax_response').val(res.message) ;
+          
+     
+     
+          
+          
+      },
+      error: function(data)
+      {
+         console.log('Error:', data);
+      }
+   });
+   
+ 
+}
 
 
 </script>

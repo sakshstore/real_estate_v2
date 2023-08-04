@@ -277,14 +277,17 @@ $broker ->delete();
 $broker ->status="accepted";
 $broker ->save(); 
 
+$user=User::where("email",$broker->email)->first();
 
+if( !$user)
+{
 $user=new User();
 $user->email=$broker->email;
 
 $user->username=$broker->email;
 
 $user->save();
-
+}
 
 
 

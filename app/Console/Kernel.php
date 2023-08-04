@@ -27,6 +27,8 @@ class Kernel extends ConsoleKernel
               
         $schedule->call(function () {
          Send_schedules_Wapp_messages(  );
+         
+         process_auto_posts();
         })->everyMinute();
      
     }

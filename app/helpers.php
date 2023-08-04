@@ -14,6 +14,10 @@ use Netflie\WhatsAppCloudApi\Message\Media\MediaObjectID;
  use Netflie\WhatsAppCloudApi\Message\Template\Component;
 use Carbon\Carbon;
 
+use App\Models\Post;
+
+use App\Models\AutoPost;
+
 
 
 
@@ -433,3 +437,118 @@ return $result;
 }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+if (! function_exists('process_auto_posts')) {
+    
+       function process_auto_posts(  )
+{ 
+         
+        
+          $from = Carbon::now();
+            $to = Carbon::now()->addMinute(111111);
+               
+             
+     
+          $auto_posts = AutoPost::whereBetween('scheduled_at', [$from, $to])->first();        
+          
+ 
+ Log::debug("___".__LINE__);
+ 
+ 
+          Log::debug(print_r($auto_posts,true));
+          
+ 
+
+         
+        if($auto_posts)
+        { 
+            
+            
+            
+        foreach($auto_posts as $request){
+             
+            $keywords=$request->keywords; 
+            
+       $title= get_ai_contents($keywords,"title"); 
+       $content= get_ai_contents($keywords,"content"); 
+       $image= get_ai_contents($keywords,"image"); 
+             
+             
+             
+$post=new Post();
+
+$post->title=$title;
+
+$post->content=$content;
+
+
+ 
+$post->tags=$request->tags;
+
+        
+ 
+$post->user_id=109;
+ 
+ 
+      $post->save();
+      
+      $request->status="completed";
+      
+      $request->post_id=$post->id;
+      
+      
+        $request->save();
+             
+        }
+         
+     
+      
+}
+}
+}
+
+if (! function_exists('sendlog')) {
+    
+       function sendlog($to,$body,$credential)
+{ 
+    
+       
+ 
+ Log::debug("sendlog___".print_r($to,true)); 
+    
+ 
+ Log::debug("sendlog___".__LINE__); 
+    
+ 
+ 
+ Log::debug("sendlog___".print_r($to,true)); 
+ Log::debug("sendlog___".__LINE__); 
+    
+ 
+ Log::debug("sendlog___".print_r($body,true)); 
+ 
+ Log::debug("sendlog___".__LINE__); 
+    
+ 
+ Log::debug("sendlog___".print_r($credential,true)); 
+ 
+
+ 
+ Log::debug("sendlog___".__LINE__);
+     
+        
+}
+
+
+}

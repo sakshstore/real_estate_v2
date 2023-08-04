@@ -34,7 +34,7 @@ use App\Http\Controllers\PostController;
 
 use App\Http\Controllers\PropertyController;
 
-
+use App\Http\Controllers\AutoPostController;
 
 use App\Http\Controllers\SubscriptionController;
 /*
@@ -235,6 +235,8 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
     
     
+    
+    
     Route::resource('subscriptions', SubscriptionController::class) ;
     
     Route::resource('subscribers', SubscriberController::class) ;
@@ -249,6 +251,10 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
     
     Route::resource('posts', PostController::class) ;
+    
+    
+    
+    Route::resource('auto_posts', AutoPostController::class) ;
     
     
 

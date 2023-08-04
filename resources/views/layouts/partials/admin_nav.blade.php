@@ -31,9 +31,9 @@
                                 Properties
                             </a>
                             
-                            <a class="nav-link" href="{{ route('vendors.index') }}">
+                            <a class="nav-link" href="{{ route('brokers.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
-                                Vendors
+                                Brokers
                             </a>
                             
                              
@@ -56,6 +56,10 @@
     
 
 <li  > <a href="{{ route('posts.index') }}"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage posts</a></li>
+
+
+
+<li  > <a href="{{ route('auto_posts.index') }}"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage Auto posts</a></li>
 
 
 

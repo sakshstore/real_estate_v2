@@ -34,6 +34,44 @@
 											<td>{{ $lead->refer }}</td>
 
                                             <td>
+                            
+        
+        
+    <form action="{{ route('set_lead_tags',$lead->id) }}" method="POST">
+                                                    
+                                                    @csrf
+                                                    
+                                                       <div class="mb-3">
+            <label for="status" class="col-form-label">Tags</label>
+           
+        <input type="text" class="form-control status_tags" value="{{ $lead->tags }}" name="tags" >
+              
+          </div>
+           
+   
+  <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-fw fa-home"></i> Update Tags</button>
+  
+  <hr />
+                                                </form>
+        
+        
+    <form action="{{ route('set_lead_status',$lead->id) }}" method="POST">
+                                                    
+                                                    @csrf
+                                                    
+                                                       <div class="mb-3">
+            <label for="status" class="col-form-label">Status</label>
+           
+        <input type="text" class="form-control status_tags" value="{{ $lead->status }}" name="status" >
+              
+          </div>
+           
+   
+  <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-fw fa-home"></i> update_status</button>
+                                                </form>
+        
+          <hr />
+        
                                                 <form action="{{ route('leads.destroy',$lead->id) }}" method="POST">
                                                     
                                                     @csrf
