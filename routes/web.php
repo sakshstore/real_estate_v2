@@ -37,6 +37,12 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\AutoPostController;
 
 use App\Http\Controllers\SubscriptionController;
+
+
+use App\Http\Controllers\CustomformController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -160,15 +166,13 @@ Route::get('/properties/{property}/unpublish_property', [PropertyController::cla
 
 Route::post('/properties/{property}/setimages', [PropertyController::class, 'post_set_property_images'])->name('post_set_property_images');
 
+Route::patch('/properties/{property}/set_update_other_fields', [PropertyController::class, 'post_set_update_other_fields'])->name('post_set_update_other_fields');
+
 
 
 
 Route::patch('/properties/{property}/update_connectivity', [PropertyController::class, 'update_connectivity'])->name('update_connectivity');
-
-
-
-
-
+ 
 Route::post('/properties/{property}/setthumbnail', [PropertyController::class, 'post_set_thumbnail_image'])->name('post_set_thumbnail_image');
 
 
@@ -183,14 +187,9 @@ Route::post('/properties/{property}/remove_brochure_url', [PropertyController::c
 Route::post('/properties/{property}/post_brochure', [PropertyController::class, 'post_brochure'])->name('post_brochure');   
 });
 
-
-
-
-
+ 
 Route::post('remove_connectivity/{property}', [PropertyController::class, 'remove_connectivity']   )->name('remove_connectivity'); 
-
-
-    
+ 
 Route::get('section_settings', [PropertyController::class, 'section_settings'])->name('section_settings');
  
 Route::post('post_logo_slider_images', [PropertyController::class, 'post_logo_slider_images'])->name('post_logo_slider_images');
@@ -201,16 +200,8 @@ Route::post('post_carousel_images', [PropertyController::class, 'post_carousel_i
 Route::post('remove_logo_sliders_image', [PropertyController::class, 'remove_logo_sliders_image'])->name('remove_logo_sliders_image');
  
  
-Route::post('remove_carousel_image', [PropertyController::class, 'remove_carousel_image'])->name('remove_carousel_image');
- 
- 
- 
- 
- 
-    
-    
-    
-    
+Route::post('remove_carousel_image', [PropertyController::class, 'remove_carousel_image'])->name('remove_carousel_image'); 
+
     Route::get('settings',[ SettingsController::class,'get_settings'])->name("get_settings") ;
     
     Route::post('settings_notifications',[ SettingsController::class,'settings_notifications'])->name("settings_notifications") ;
@@ -311,7 +302,9 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
     
     
+    Route::resource('customforms', CustomformController::class) ;
 
+Route::post('set_form_fields/{customform}', [CustomformController::class, 'set_form_fields']   )->name('set_form_fields'); 
 
  // for designer end
 

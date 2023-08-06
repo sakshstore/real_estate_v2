@@ -31,7 +31,7 @@ class AutoPost extends Model
      *
      * @var array
      */
-    protected $fillable = ['keywords','category','status','post_id','tags','schedule_at'];
+    protected $fillable = ['keywords','category','status','post_id','tags','scheduled_at'];
 
 
 

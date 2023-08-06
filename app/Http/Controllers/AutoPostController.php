@@ -51,42 +51,7 @@ class AutoPostController extends Controller
         
         
         
-        
-        /*
-        
-        
- $autoPost=new AutoPost();
-
- $autoPost->title=$request->title;
-
- $autoPost->content=$request->content;
-
-
-        $tags=array();
-  $tags_arr=json_decode($request->tags);
- foreach ($tags_arr as $tags_ele) {
- 	array_push($tags,$tags_ele->value);
-}
-
- $tags_list=implode(",",$tags);
-
-
-
-
- $autoPost->tags=$tags_list;
-
-        
-        
-
- $user=Auth::user();
- 
- $autoPost->user_id=$user->id;
- 
- 
-       $autoPost->save();
-        
-*/
-
+         
 
 
 

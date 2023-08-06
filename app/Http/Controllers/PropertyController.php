@@ -10,6 +10,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Property;
 use Illuminate\Http\Request;
  use Illuminate\Support\Facades\Auth;
+ 
+ 
+ 
+use App\Models\Customform;
+
+
 use App\Models\User;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 /**
@@ -834,12 +840,17 @@ $permission=$user->can('update' ,$property);
             
             
             
+         
+            
+            
+            		$customform = Customform::first();
+            
 $connectivity_array=get_connectivity_tags(); 
 
 $amminities_array=get_amminities_tags(); 
-$case="edit";
  
-        return view('property.edit_property', compact('property','connectivity_array','amminities_array','case'));
+ 
+        return view('property.edit_property', compact('property','connectivity_array','amminities_array', 'customform'));
     }
     
     
@@ -855,7 +866,7 @@ $case="edit";
     {
        
        
-         $user=Auth::user();
+            $user=Auth::user();
  
 $permission=$user->can('update' ,$property);
  if(!$permission)
@@ -863,32 +874,52 @@ $permission=$user->can('update' ,$property);
             
             
             
+  
+            
             request()->validate(Property::$rules);
 
+        
         $property->update($request->all());
-
-
-    if(isset($request->aminities))
-    
-    {
-        $aminities=array();
-  $aminities_array=json_decode($request->aminities);
- foreach ($aminities_array as $aminities_element) {
- 	array_push($aminities,$aminities_element->value);
-}
-
- $aminities_list=implode(",",$aminities);
-
-
+ 
        
        $property->project_tags=implode(",",get_value_array_from_tag( $request->project_tags));
        
-
-       $property->aminities=$aminities_list;
+ 
        
         $property->save();
+        
+    
+ return redirect()->route('properties.edit',$property->id)
+          ->with('success', 'Property created successfully.');
+    }
+    
+    
+    
+    
+    
+    
+    
+ public function post_set_update_other_fields(Request $request, Property $property)
+    {
        
-    }  
+       
+            $user=Auth::user();
+ 
+$permission=$user->can('update' ,$property);
+ if(!$permission)
+            abort(403);
+            
+            
+            
+      $request_data=$request->except('_method', '_token')  ;
+       
+       
+       $property->overview_custom_fields=json_encode($request_data);
+              
+              
+               $property->save();
+        
+   
  return redirect()->route('properties.edit',$property->id)
           ->with('success', 'Property created successfully.');
     }

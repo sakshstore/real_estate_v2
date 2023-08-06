@@ -54,7 +54,7 @@ class Property extends Model implements Viewable
      */
     protected $fillable = ['bedrooms','starting_price','tenure','property_type','size_from','completion',
     'interiors','payment_plan_short','payment_plan_details','down_payment','connectivities','unit_details','connectivites',
-    'floor_details','amenities','location','address','location_gps','gallery','broucher','latitude', 'longitude','video_url',
+    'floor_details','amenities','location','address','location_gps','gallery','broucher','latitude', 'longitude','video_url','overview_custom_fields',
     'project_name','project_details','aminities','bathrooms','gallery_url','garage','property_thumbnail_url','status','brochure_url',
     'broker_id','developer','tags','project_tags'];
 

@@ -19,6 +19,9 @@ use App\Models\Post;
 use App\Models\AutoPost;
 
 
+use App\Models\BulkMessage;
+
+
 
 
 
