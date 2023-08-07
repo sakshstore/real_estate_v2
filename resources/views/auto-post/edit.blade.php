@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-master')
 
 @section('title')
     Update Auto Post
@@ -8,26 +8,9 @@
  
  
  
-             
               
-                     <span class="header">Update auto-post</span>
-                
-                
-            <form action="{{ route('update_avatar_auto-post',auto-post->id ) }}"
-      class="dropzone"
-      id="avatar_auto-post">
-    
-        @csrf
-      
-      
-      
-</form>
- 
- 
- 
- <hr />
          
-                        <form method="POST" action="{{ route('auto-posts.update', $autoPost->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('auto_posts.update', $autoPost->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
@@ -62,21 +45,12 @@
  
 <script> 
  
-
-
-    ClassicEditor
-        .create( document.querySelector( '.editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-        
-          
-	
+ 
 
     
   var input = document.querySelector('.tags');
    
- 
+ console.log(input);
      var tags_values = [  ];
  
   
@@ -92,34 +66,10 @@
       }
     })	
 
+console.log(tagify);
 
 </script>
- 
- 
- 
-<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
-
- <script>
- var options={
-     
-       
-      acceptedFiles: ".jpeg,.jpg,.png"
-     
- };
- 
- 
- let myavatar=new Dropzone("#avatar_auto-post" ,options  );
-
-
-  mockFile = { name: '{{ {modelView}}->avatar_auto-post}}'  };
   
-  
- myavatar.displayExistingFile(mockFile, '{{asset(  auto-post->avatar_auto-post)}}');
- 
- 
- 
-  
-  </script>
         
 @endsection
 

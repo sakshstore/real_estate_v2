@@ -38,7 +38,7 @@
   <label for="saksh_tags" class="form-label">tags</label>
   
   
-  <input type="text" class="form-control  ($errors->has('tags') ? ' is-invalid' : '')  " id="saksh_tags" name="tags"   value="{{$autoPost->tags}}" placeholder="tags">
+  <input type="text" class="form-control  ($errors->has('tags') ? ' is-invalid' : '')  tags " id="saksh_tags" name="tags"   value="{{$autoPost->tags}}" placeholder="tags">
   
     {!! $errors->first('tags', '<div class="invalid-feedback">:message</div>') !!}
 </div>
@@ -50,12 +50,12 @@
         
         <div class="form-group  mb-3">
         
-  <label for="saksh_schedule_at" class="form-label">schedule_at</label>
+  <label for="saksh_scheduled_at" class="form-label">Scheduled at</label>
   
   
-  <input type="text" class="form-control  ($errors->has('schedule_at') ? ' is-invalid' : '')  " id="saksh_schedule_at" name="schedule_at"   value="{{$autoPost->schedule_at}}" placeholder="schedule_at">
+  <input type="text" class="form-control  ($errors->has('scheduled_at') ? ' is-invalid' : '')  " id="saksh_scheduled_at" name="scheduled_at"   value="{{$autoPost->scheduled_at}}" placeholder="scheduled_at">
   
-    {!! $errors->first('schedule_at', '<div class="invalid-feedback">:message</div>') !!}
+    {!! $errors->first('scheduled_at', '<div class="invalid-feedback">:message</div>') !!}
 </div>
 
 

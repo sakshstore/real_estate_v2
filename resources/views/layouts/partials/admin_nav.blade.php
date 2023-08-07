@@ -85,6 +85,9 @@
 <li  > <a href="{{ route('subscribers.index') }}"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage subscriber</a></li>
 
 
+<li  > <a href="{{ route('customforms.index') }}"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage customforms</a></li>
+
+
 
      
                             <div class="sb-sidenav-menu-heading">User Settings</div>

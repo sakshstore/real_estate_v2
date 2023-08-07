@@ -102,18 +102,8 @@ $price_usd=0;
 </div>
  
 									  
-									   <div class="mb-3">
-  <label for="garage" class="form-label">Garage</label>
-  <input type="text" class="form-control" id="garage" name="garage"   value="{{ $property->garage }}"  >
-</div>
- 
 								
-									  
-									   <div class="mb-3">
-  <label for="bathrooms" class="form-label">Bathrooms</label>
-  <input type="text" class="form-control" id="bathrooms" name="bathrooms"   value="{{ $property->bathrooms }}"  >
-</div>
-									    
+								
 							 
 									  
 									   <div class="mb-3">
@@ -130,13 +120,7 @@ $price_usd=0;
 </div>
  
 									    
-							 
-									  
-									   <div class="mb-3">
-  <label for="payment_plan_short" class="form-label">Payment plan short</label>
-  <input type="text" class="form-control" id="payment_plan_short" name="payment_plan_short"   value="{{ $property->payment_plan_short }}"  >
-</div>
- 
+									    
 									    
 							 
 									  
@@ -193,7 +177,11 @@ $price_usd=0;
 </div>
  
  
+							 
+							
+									
+									
 									
 									</form>
-									    
+									     
 									

@@ -1,11 +1,10 @@
 <!doctype html>
-<html lang="en"  data-bs-theme="dark">
+<html lang="en" >
     <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.87.0">
+   
+   
      
 
 
@@ -36,7 +35,9 @@
 
 
     @include('layouts.partials.messages')
-     
+    
+                   
+                   
         @yield('content')
     </main>
 
@@ -68,7 +69,7 @@
                  $('input[name="grecaptcha_token"]').val(token);
                  
                  
-              console.log(token);
+            
              document.getElementById("saksh_recaptcha_form").submit(); 
               
               // Add your logic to submit to your backend server here.

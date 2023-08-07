@@ -105,7 +105,7 @@
      
   
   
-  <a href="{{ route('get_vendor',$property->broker->username) }}">
+  <a href="{{ route('get_broker',$property->broker->username) }}">
       
       
       {{$property->broker->name}}

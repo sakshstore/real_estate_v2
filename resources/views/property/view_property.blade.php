@@ -143,6 +143,11 @@
 								      	<div class="card-body">
 									    
 									     <h5 class="text-heading mb-4">Additional Details</h5>
+									     
+				 		     
+									      
+									     
+									     
 								 <table class="table">
 								     
 								     
@@ -216,6 +221,45 @@
 
  
  
+								<div class="card mt-2">
+								    
+								      	<div class="card-body">
+									    
+									     <h5 class="text-heading mb-4">Additional Details</h5>
+									     
+									     
+			 	     
+									     <?php
+									     
+									     
+				  $data= json_decode( $property->overview_custom_fields );
+			//	  print_r($data);
+				  foreach($data as  $x => $val)
+				  {
+				      echo "<hr />";
+				      
+				     echo $x;
+				//  var_dump($x);
+				  
+				  if(is_string($val)) echo $val;
+			
+			var_dump($val);
+				      
+				  }
+		 
+				  
+				  ?>
+				  
+				   	      
+							    
+									    </div>
+								 
+									   	</div>
+									  			     
+									     
+									     
+									     
+									     
 
 
                                     <div class="card  mt-2 ">

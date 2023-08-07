@@ -396,7 +396,7 @@
                     </div>
                     <div class="whoweare-pera">
                       
-                      
+                      <button class="shadow-lg p-3 mb-5 bg-body rounded"> test </button>
                         
                   
        @include('subscriber.subscriber_section' )
@@ -418,25 +418,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css"   />
-<!-- Font Awesome -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
+ 
 <!-- Google Fonts -->
 <link
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
   rel="stylesheet"
 />
-<!-- MDB -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
-  rel="stylesheet"
-/>
-<style>
+ 
      
-    
-    .unique_point{
+    <style>
+      
+        
+            .unique_point{
         
         text-align:center;
     }

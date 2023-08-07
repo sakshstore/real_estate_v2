@@ -25,6 +25,8 @@
     
     
      
+    <button class="nav-link" id="nav-other-tab" data-bs-toggle="tab" data-bs-target="#nav-other" type="button" role="tab" aria-controls="nav-other" aria-selected="false">Other Options</button>
+     
     <button class="nav-link" id="nav-amenities-tab" data-bs-toggle="tab" data-bs-target="#nav-amenities" type="button" role="tab" aria-controls="nav-amenities" aria-selected="false">Amenities</button>
     
     
@@ -53,6 +55,10 @@
   
   
    
+  
+  <div class="tab-pane fade" id="nav-other" role="tabpanel" aria-labelledby="nav-other-tab" tabindex="0"> @include('property.edit_sections.other') </div>
+  
+  
   
   <div class="tab-pane fade" id="nav-amenities" role="tabpanel" aria-labelledby="nav-amenities-tab" tabindex="0"> @include('property.edit_sections.aminities') </div>
   
@@ -86,7 +92,7 @@
 @section('style')       
                     
                <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
-                         
+                   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />              
                     
 @endsection
 
@@ -97,16 +103,31 @@
   <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
  
  
-    
+     
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+  <script src="https://formbuilder.online/assets/js/form-builder.min.js"></script>
+  
+  
+  <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
+
                         
                         <script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
                         
-                        
+                 
                           <script>
                             
-                            
-                            
-                            
+                          /*  
+                            jQuery(function($) {
+									        
+   var formData=  <?php  // echo  $customform->form_json ; ?>  ;
+   
+var formRenderInstance = $('#render-container').formRender( {  formData});
+
+  
+ 
+									          });    
+                            */
                             
                                                     
   var connectivity_tags = document.querySelector('.connectivity_tags');

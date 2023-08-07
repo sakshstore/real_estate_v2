@@ -55,13 +55,17 @@ font-family: 'Roboto Condensed', sans-serif;
 </head>
 <body>
  
+ 
+ 
     @include('layouts.partials.navbar')
     
-     
- 
+                                                                                                       
+                                                                                                                                                                
+                                                                                                                                                                                                                
+                                                                                                            
     
     <main  class="saksh_contents">
-
+ 
     @include('layouts.partials.messages')
         @yield('content')
   
@@ -84,7 +88,8 @@ font-family: 'Roboto Condensed', sans-serif;
      
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" ></script>
 
-    
+ 
+
 
  
      @yield("scripts") 
