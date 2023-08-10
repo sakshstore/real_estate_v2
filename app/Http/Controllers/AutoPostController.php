@@ -45,16 +45,25 @@ class AutoPostController extends Controller
     public function store(Request $request)
     {
         //request()->validate(AutoPost::$rules);
-
-    $autoPost = AutoPost::create($request->all());
         
         
-        
-        
+ $autoPost = new AutoPost();
+  $autoPost->keywords=$request->keywords;
+  
+  
+  $autoPost->category=$request->category;
+  
+  
+  $autoPost->scheduled_at=$request->scheduled_at;
+  
+  
+ 
          
-
-
-
+$autoPost->tags= implode(",", get_value_array_from_tag($request->tags)) ;
+        
+        
+       $autoPost->save(); 
+        
         return redirect()->route('auto_posts.index')
             ->with('success', 'AutoPost created successfully.');
     }
@@ -96,7 +105,19 @@ class AutoPostController extends Controller
     {
        // request()->validate(AutoPost::$rules);
 
-        $autoPost->update($request->all());
+
+        
+  $autoPost->keywords=$request->keywords;
+  
+  
+  $autoPost->category=$request->category;
+  
+  
+  $autoPost->scheduled_at=$request->scheduled_at;
+  
+$autoPost->tags= implode(",", get_value_array_from_tag($request->tags)) ;
+ 
+        $autoPost->save( );
 
         return redirect()->route('auto_posts.index')
             ->with('success', 'AutoPost updated successfully');

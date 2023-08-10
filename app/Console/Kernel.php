@@ -26,6 +26,13 @@ class Kernel extends ConsoleKernel
     {    
               
         $schedule->call(function () {
+            
+             monitor_cron_job( );
+             
+             
+ Log::debug(Carbon::now());
+ 
+ 
          Send_schedules_Wapp_messages(  );
          
          process_auto_posts();

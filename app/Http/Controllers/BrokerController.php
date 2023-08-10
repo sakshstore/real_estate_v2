@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
  use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-use App\Models\Property;
+use App\Models\Customform;
 
+use App\Models\Property; 
+
+use App\Models\Subscription;
 
 /**
  * Class BrokerController
@@ -44,30 +47,67 @@ class BrokerController extends Controller
      */
     public function register_as_broker()
     {
+        //$flight = Flight::where('number', 'FR 900')->first();
+         
+      $customform=  Customform::where("form_name","broker_registration")->first();
+        
+        
          $broker = new Broker();
-        return view('broker.register_as_broker', compact('broker'));
+        return view('broker.register_as_broker', compact('broker','customform'));
     } 
+    
+    
+    
+    
+     public function validate_broker_registeration(Request $request)
+    {
+        
+ $request->validate(Broker::$rules);
+
+  // $request->validate('email:rfc,dns');
+    
+        $broker = Broker::where( "email", $request->email)->first();
+        
+        
+        if($broker)
+        
+        {
+            $msg= "Email already registered";
+            
+        }
+       else{
+           
+                        $msg= "Email available for registeration";
+       }
+     
+     
+     return response()->json([
+  "message"=> $msg
+]);
+
+
+}
     
      public function register_as_broker_post(Request $request)
     {
   // $request()->validate(Broker::$rules);
 
-       
+    /*
+   
        
         
  $broker=new Broker();
 
- $broker->name=$request->name;
+// $broker->order_id="SAKSH_".rand(100,300)."_".rand(100,300)."_".rand(100,300)."_".rand(100,300);
 
- $broker->email=$request->email;
+
+
 
  $broker->company_name=$request->company_name;
 
  $broker->registeration_number=$request->registeration_number;
 
  $broker->phone=$request->phone;
-
- $broker->mobile=$request->mobile;
 
  $broker->date_of_birth=$request->date_of_birth;
 
@@ -89,22 +129,50 @@ class BrokerController extends Controller
 
  $broker->total_experience=$request->total_experience;
 
+ $broker->form_json=$request->total_experience;
+
  $broker->timezone=$request->timezone;
   
  $user=Auth::user();
  
  $broker->user_id=100;
+ */
  
  
-       $broker->save();
         
+	$user=	Auth::user();
+        
+            
+      $request_data=$request->except('_method', '_token')  ;
+       
+       
+       $user->form_json=json_encode($request_data);
+              
+             
+ $user->name=$request->name;
+ 
 
+ $user->mobile=$request->mobile; 
+              
+ 
+       $user->save();
+        
+   
+         
+        
+       $subscriptions = Subscription::all();
 
+       
+        
+      
 
-
-
-        return redirect()->back( )
+        return  view('paypal.index',compact('user','subscriptions' ))
             ->with('success', 'Broker created successfully.');
+
+
+
+       // return view('broker.create', compact('broker'));
+ 
     }
 
 
@@ -137,10 +205,10 @@ class BrokerController extends Controller
         
         
         
+	$user=	Auth::user();
         
         
-        
- $broker=new Broker();
+         
 
  $broker->name=$request->name;
 

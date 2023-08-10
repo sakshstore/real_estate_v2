@@ -30,22 +30,29 @@
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
                                 Properties
                             </a>
+                                
+                            <a class="nav-link" href="{{ route('orders.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
+                                orders
+                            </a>
                             
+                            <a class="nav-link" href="{{ route('login_history') }}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
+                                Login History
+                            </a>      <a class="nav-link" href="{{ route('login_history') }}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
+                               Profile
+                            </a>
+                            
+                         @role('admin')     
                             <a class="nav-link" href="{{ route('brokers.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
                                 Brokers
                             </a>
-                            
-                             
+                              
                             <div class="sb-sidenav-menu-heading">Website </div>
                           
-                             
-              
-                     
-         
-           
-  
- 
+                              
                
                
 
@@ -87,8 +94,11 @@
 
 <li  > <a href="{{ route('customforms.index') }}"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage customforms</a></li>
 
+                 @endrole 
+                 
+                 
 
-
+   @role('admin')
      
                             <div class="sb-sidenav-menu-heading">User Settings</div>
                           
@@ -106,7 +116,7 @@
  
  
  
-     
+  
                             <div class="sb-sidenav-menu-heading">System Settings</div>
                           
                              
@@ -116,6 +126,10 @@
 
 
 <li  > <a href="{{ route('get_settings') }}"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-gears"></i></div>System Settings </a></li>
+                 
+                 @endrole
+                 
+                 
                         </div>
                     </div>
                     

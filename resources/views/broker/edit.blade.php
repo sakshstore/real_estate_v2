@@ -30,11 +30,11 @@
  
  <hr />
          
-                        <form method="POST" action="{{ route('vendors.update', $vendor->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('brokers.update', $broker->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('vendor.form')
+                            @include('broker.form')
 
                         </form>
                         
@@ -114,10 +114,10 @@
  let myavatar=new Dropzone("#avatar_vendor" ,options  );
 
 
-  mockFile = { name: '{{ $vendor->avatar_vendor}}'  };
+  mockFile = { name: '{{ $broker->avatar_vendor}}'  };
   
   
- myavatar.displayExistingFile(mockFile, '{{asset(  $vendor->avatar_vendor)}}');
+ myavatar.displayExistingFile(mockFile, '{{asset(  $broker->avatar_vendor)}}');
  
  
  

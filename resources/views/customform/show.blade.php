@@ -58,12 +58,10 @@
                 <div id="fbeditor"></div>
                 
                 
-                <div id="myDiv" class="btn btn-success w-100 mb-2">save </div>
-                
-                <div id="setData" class="btn btn-success w-100">Load Form </div>
-               
-  
- 
+                <div id="saveform" class="btn btn-success w-100 mb-2">save </div>
+                 
+                <div id="ajax_response"> </div>
+   
   
   
   
@@ -91,20 +89,19 @@
   jQuery(function($) {
  
 
-   var formData=  <?php echo  $customform->form_json ; ?>  ;
- 
-var options = {
-      defaultFields:  formData 
-    };
-
-console.log(options);
-var fields = [{
-  label: "Email",
-  type: "text",
-  subtype: "email",
-  icon: "✉"
-}];
-// inside the tinymce control class this is available as this.classConfig.paste_data_images
+   var formData=  <?php 
+   
+   if(!$customform->form_json)
+   
+   echo  '[{"type":"text","required":false,"label":"Text Field","className":"form-control","name":"text-1691241228058-0","access":false,"subtype":"text"}] ';
+   
+  
+   
+   
+   else
+   
+   echo  $customform->form_json ; ?>  ;
+  
 
 var options = {
       disableFields: ['autocomplete','file',"header","paragraph"],
@@ -114,31 +111,24 @@ var options = {
     1: 'Administrator',
   } 
     };
-
-   var formData=  <?php echo  $customform->form_json ; ?>  ;
+ 
+   
+   
 var fbEditor = document.getElementById('fbeditor');
 var formBuilder = $(fbEditor).formBuilder(options);
 
 
-
  
-document.getElementById('setData').addEventListener('click', function() {
-    formBuilder.actions.setData(formData);
-});
-    
     
 
-$( "#myDiv" ).on( "click", function() {
+$( "#saveform" ).on( "click", function() {
     
-     
- //  var form_data= formBuilder.actions.getData('json',true );
+      
  
    var formData= formBuilder.actions.getData('json' );
  
   
-  
-     
-//var formRenderInstance = $('#render-container').formRender({ formData });
+   
 
  
  save_custom_form({{ $customform->id }},formData );
@@ -192,14 +182,10 @@ function save_custom_form(form_id,form_data )
       success: function(res)
       {
           
+           
+          $('#ajax_response').val(res) ;
           
-          console.log(res);
-          console.log(res.contents);
-          $('#ajax_response').val(res.message) ;
-          
-     
-     
-          
+      
           
       },
       error: function(data)

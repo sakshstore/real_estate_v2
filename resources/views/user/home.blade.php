@@ -54,6 +54,19 @@
                                        
                                    
                                 </div> 
+                                </div> 
+                                
+                                
+                                <div class="col-3"> <div class="card text-bg-dark">
+                                    <div class="card-body">
+                                     
+                                                <h5 class="text-muted  "  >  Last time Cron Run </h5>
+                                                <h3 class="my-2 py-1">   {{ $last_cron_run_time}}  </h3>
+                                                 
+                                            </div>
+                                       
+                                   
+                                </div> 
                                 </div > 
                                 
                                 
@@ -69,6 +82,22 @@
                                        
                                    
                                 </div></div>
+                                
+                                
+                                
+                                
+                                <div class="col-3">   <div class="card text-bg-dark">
+                                    <div class="card-body">
+                                     
+                                                <h5 class="text-muted  "  >System Time</h5>
+                                                <h3 class="my-2 py-1">{{ current_time() }}   </h3>
+                                                
+                                            </div>
+                                       
+                                   
+                                </div></div>
+                                
+                                
                                 
                                 
                                 

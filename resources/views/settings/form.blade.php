@@ -24,7 +24,7 @@
   
   
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Cron Job Settings</button>
+    <button class="nav-link" id="pills-cron-tab" data-bs-toggle="pill" data-bs-target="#pills-cron" type="button" role="tab" aria-controls="pills-cron" aria-selected="false">Cron Job Settings</button>
   </li>
   
 </ul>
@@ -47,7 +47,11 @@
     
     
     
-  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">.Cron Job..</div>
+  <div class="tab-pane fade" id="pills-cron" role="tabpanel" aria-labelledby="pills-cron-tab" tabindex="0">
+    @include('settings.cron_job')</div>
+    
+    
+     
  
 </div>
  

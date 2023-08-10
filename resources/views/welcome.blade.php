@@ -396,7 +396,7 @@
                     </div>
                     <div class="whoweare-pera">
                       
-                      <button class="shadow-lg p-3 mb-5 bg-body rounded"> test </button>
+               
                         
                   
        @include('subscriber.subscriber_section' )

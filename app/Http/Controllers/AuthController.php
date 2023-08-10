@@ -31,7 +31,7 @@ class AuthController extends Controller
 
 
  
-
+ 
 $login_histories = LoginHistory::where("user_id",Auth::user()->id)->latest()->take(5)->get();
           
 
@@ -41,9 +41,11 @@ $login_histories = LoginHistory::where("user_id",Auth::user()->id)->latest()->ta
         
         $leads = Lead::orderBy('created_at', 'desc')->take(15)->get();
         
-    
+      
+        
+   $last_cron_run_time=  last_cron_run_time( );
  
-        return view('user.home', compact('login_histories','properties','leads'));
+        return view('user.home', compact('login_histories','properties','leads','last_cron_run_time'));
     }
     
      public function login_history()
@@ -127,6 +129,11 @@ $res=false;
    // login now 
 
       Auth::login($user);
+      
+      $roles = $user->getRoleNames(); // Returns a collection
+      
+      
+      
 
             return redirect('/home');
             

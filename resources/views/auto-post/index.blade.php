@@ -46,7 +46,7 @@
 											<td>{{ $autoPost->tags }}</td>
 											<td>{{ $autoPost->status }}</td>
 											<td>{{ $autoPost->post_id }}</td>
-	<td>{{ $autoPost->schedule_at }}</td>
+	<td>{{ $autoPost->scheduled_at }}</td>
 
                                             <td>
                                                 <form action="{{ route('auto_posts.destroy',$autoPost->id) }}" method="POST">

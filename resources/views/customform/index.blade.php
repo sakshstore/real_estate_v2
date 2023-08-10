@@ -27,22 +27,18 @@
                                         <th>No</th>
                                         
 										<th>Form Name</th>
-										<th>Form Type</th>
-										<th>Form Submits</th>
-										<th>Form Json</th>
-
+									 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($customforms as $customform)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                          
                                             
-											<td>{{ $customform->form_name }}</td>
-											<td>{{ $customform->form_type }}</td>
-											<td>{{ $customform->form_submits }}</td>
-											<td>{{ $customform->form_json }}</td>
+											<td>{{ $customform->id }}</td>
+									 		<td>{{ $customform->form_name }}</td>
+									 
 
                                             <td>
                                                 <form action="{{ route('customforms.destroy',$customform->id) }}" method="POST">

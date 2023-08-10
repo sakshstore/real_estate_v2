@@ -243,7 +243,7 @@
 				  
 				  if(is_string($val)) echo $val;
 			
-			var_dump($val);
+		 
 				      
 				  }
 		 

@@ -36,8 +36,8 @@ class Broker extends Model
 {
     
     static $rules = [
-		'name' => 'required',
-		'email' => 'required',
+	 'email' => 'unique:users,email'
+	 
     ];
 
     protected $perPage = 20;
@@ -47,7 +47,8 @@ class Broker extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','email','company_name','registeration_number','phone','mobile','date_of_birth','address','city','state','country','pin','referral','selected_plan','annual_earning','total_experience','timezone','avatar','user_id'];
+    protected $fillable = ['name','email','form_json','company_name','registeration_number','phone','mobile','date_of_birth','address','city','state','country','pin','referral','selected_plan',
+    'annual_earning','total_experience','timezone','avatar','user_id','payment_gateway','payment_id','payment_status'];
 
 
 

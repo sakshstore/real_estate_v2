@@ -4,7 +4,7 @@
   
     
      <a class="navbar-brand" href="{{ route('homepage') }}">
-      <img src="{{ env('APP_LOGO')}}" alt=""  > {{ env('APP_NAME')}}
+      <img src="{{ env('APP_LOGO')}}" alt="" class="img-fluid" > {{ env('APP_NAME')}}
     </a>
     
     
@@ -54,7 +54,7 @@
 
 
 
-       <li class="nav-item"><a href="{{ route('register_as_broker') }}"   class="nav-link" >Register as broker</a></li>
+       <li class="nav-item"><a href="{{ route('login') }}"   class="nav-link" >Register as broker</a></li>
       
       
              <li class="nav-item"><a href="{{ route('our_brokers') }}"   class="nav-link" >Our brokers</a></li>

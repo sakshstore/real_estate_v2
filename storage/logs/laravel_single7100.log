@@ -1,0 +1,38 @@
+[2023-08-10 19:04:56] local.DEBUG: response_logArray
+(
+    [id] => 9BV417055E1166930
+    [status] => CREATED
+    [links] => Array
+        (
+            [0] => Array
+                (
+                    [href] => https://api.sandbox.paypal.com/v2/checkout/orders/9BV417055E1166930
+                    [rel] => self
+                    [method] => GET
+                )
+
+            [1] => Array
+                (
+                    [href] => https://www.sandbox.paypal.com/checkoutnow?token=9BV417055E1166930
+                    [rel] => approve
+                    [method] => GET
+                )
+
+            [2] => Array
+                (
+                    [href] => https://api.sandbox.paypal.com/v2/checkout/orders/9BV417055E1166930
+                    [rel] => update
+                    [method] => PATCH
+                )
+
+            [3] => Array
+                (
+                    [href] => https://api.sandbox.paypal.com/v2/checkout/orders/9BV417055E1166930/capture
+                    [rel] => capture
+                    [method] => POST
+                )
+
+        )
+
+)
+  

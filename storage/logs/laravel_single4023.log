@@ -1,0 +1,166 @@
+[2023-08-10 18:56:54] local.DEBUG: 110____PAYMENT STATUS  
+[2023-08-10 18:56:54] local.DEBUG: 1119U659081JL588831E  
+[2023-08-10 18:56:54] local.DEBUG: 112Array
+(
+    [id] => 9U659081JL588831E
+    [status] => COMPLETED
+    [payment_source] => Array
+        (
+            [paypal] => Array
+                (
+                    [email_address] => sb-e58ge27034969@personal.example.com
+                    [account_id] => EGKVSEKVUQC4J
+                    [account_status] => VERIFIED
+                    [name] => Array
+                        (
+                            [given_name] => John
+                            [surname] => Doe
+                        )
+
+                    [address] => Array
+                        (
+                            [country_code] => US
+                        )
+
+                )
+
+        )
+
+    [purchase_units] => Array
+        (
+            [0] => Array
+                (
+                    [reference_id] => 152
+                    [shipping] => Array
+                        (
+                            [name] => Array
+                                (
+                                    [full_name] => John Doe
+                                )
+
+                            [address] => Array
+                                (
+                                    [address_line_1] => 1 Main St
+                                    [admin_area_2] => San Jose
+                                    [admin_area_1] => CA
+                                    [postal_code] => 95131
+                                    [country_code] => US
+                                )
+
+                        )
+
+                    [payments] => Array
+                        (
+                            [captures] => Array
+                                (
+                                    [0] => Array
+                                        (
+                                            [id] => 12811703LB260241N
+                                            [status] => COMPLETED
+                                            [amount] => Array
+                                                (
+                                                    [currency_code] => USD
+                                                    [value] => 99.00
+                                                )
+
+                                            [final_capture] => 1
+                                            [seller_protection] => Array
+                                                (
+                                                    [status] => ELIGIBLE
+                                                    [dispute_categories] => Array
+                                                        (
+                                                            [0] => ITEM_NOT_RECEIVED
+                                                            [1] => UNAUTHORIZED_TRANSACTION
+                                                        )
+
+                                                )
+
+                                            [seller_receivable_breakdown] => Array
+                                                (
+                                                    [gross_amount] => Array
+                                                        (
+                                                            [currency_code] => USD
+                                                            [value] => 99.00
+                                                        )
+
+                                                    [paypal_fee] => Array
+                                                        (
+                                                            [currency_code] => USD
+                                                            [value] => 4.91
+                                                        )
+
+                                                    [net_amount] => Array
+                                                        (
+                                                            [currency_code] => USD
+                                                            [value] => 94.09
+                                                        )
+
+                                                )
+
+                                            [links] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [href] => https://api.sandbox.paypal.com/v2/payments/captures/12811703LB260241N
+                                                            [rel] => self
+                                                            [method] => GET
+                                                        )
+
+                                                    [1] => Array
+                                                        (
+                                                            [href] => https://api.sandbox.paypal.com/v2/payments/captures/12811703LB260241N/refund
+                                                            [rel] => refund
+                                                            [method] => POST
+                                                        )
+
+                                                    [2] => Array
+                                                        (
+                                                            [href] => https://api.sandbox.paypal.com/v2/checkout/orders/9U659081JL588831E
+                                                            [rel] => up
+                                                            [method] => GET
+                                                        )
+
+                                                )
+
+                                            [create_time] => 2023-08-10T13:26:54Z
+                                            [update_time] => 2023-08-10T13:26:54Z
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [payer] => Array
+        (
+            [name] => Array
+                (
+                    [given_name] => John
+                    [surname] => Doe
+                )
+
+            [email_address] => sb-e58ge27034969@personal.example.com
+            [payer_id] => EGKVSEKVUQC4J
+            [address] => Array
+                (
+                    [country_code] => US
+                )
+
+        )
+
+    [links] => Array
+        (
+            [0] => Array
+                (
+                    [href] => https://api.sandbox.paypal.com/v2/checkout/orders/9U659081JL588831E
+                    [rel] => self
+                    [method] => GET
+                )
+
+        )
+
+)
+  

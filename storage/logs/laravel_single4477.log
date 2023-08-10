@@ -1,0 +1,38 @@
+[2023-08-10 23:18:42] local.DEBUG: response_logArray
+(
+    [id] => 8WL26640PK926152G
+    [status] => CREATED
+    [links] => Array
+        (
+            [0] => Array
+                (
+                    [href] => https://api.sandbox.paypal.com/v2/checkout/orders/8WL26640PK926152G
+                    [rel] => self
+                    [method] => GET
+                )
+
+            [1] => Array
+                (
+                    [href] => https://www.sandbox.paypal.com/checkoutnow?token=8WL26640PK926152G
+                    [rel] => approve
+                    [method] => GET
+                )
+
+            [2] => Array
+                (
+                    [href] => https://api.sandbox.paypal.com/v2/checkout/orders/8WL26640PK926152G
+                    [rel] => update
+                    [method] => PATCH
+                )
+
+            [3] => Array
+                (
+                    [href] => https://api.sandbox.paypal.com/v2/checkout/orders/8WL26640PK926152G/capture
+                    [rel] => capture
+                    [method] => POST
+                )
+
+        )
+
+)
+  

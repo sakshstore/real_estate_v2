@@ -23,7 +23,74 @@ use App\Models\BulkMessage;
 
 
 
+ 
 
+
+if (! function_exists('get_message_from_chatgpt')) {
+
+  function get_message_from_chatgpt($message){
+       
+     
+ Log::debug("CHAT GPT REQUEST".__LINE__.$message);
+ 
+ 
+ 
+ $token=env('CHAT_GPT_AUTH_KEY' );
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://api.openai.com/v1/chat/completions',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{"model": "gpt-3.5-turbo",
+"messages": [{"role": "user", "content":  "'.$message.'" }],
+"temperature": 0.7
+}',
+
+
+
+
+
+  CURLOPT_HTTPHEADER => array(
+    'Authorization: Bearer '.$token,
+    'Content-Type: application/json'
+  ),
+));
+
+$response = curl_exec($curl);
+
+ Log::debug("CHAT GPT RESPONSE".__LINE__.$response);
+ 
+ 
+file_put_contents( "chatgpt.txt",$message."_____".$response,  FILE_APPEND | LOCK_EX);
+
+
+$res=json_decode($response);
+
+ 
+ $mes=$res->choices[0];
+ 
+ 
+$message_content=$res->choices[0]->message->content;
+
+ 
+
+curl_close($curl);
+return $message_content;
+
+   }
+   
+}
+
+
+
+
+ 
 
 
 
@@ -210,7 +277,11 @@ if (! function_exists('saksh_isset')) {
 if (! function_exists('get_ai_contents')) {
     function get_ai_contents (   $str,$type)
     { 
-return $str.$type;
+        
+        $content=get_message_from_chatgpt($str);
+        
+        
+return $content;
 
 
    
@@ -463,7 +534,9 @@ if (! function_exists('process_auto_posts')) {
                
              
      
-          $auto_posts = AutoPost::whereBetween('scheduled_at', [$from, $to])->first();        
+        //  $auto_posts = AutoPost::whereBetween('scheduled_at', [$from, $to])->get();        
+          
+          $auto_posts = AutoPost::all();        
           
  
  Log::debug("___".__LINE__);
@@ -555,3 +628,78 @@ if (! function_exists('sendlog')) {
 
 
 }
+
+
+
+
+if (! function_exists('monitor_cron_job')) {
+    
+       function monitor_cron_job( )
+{ 
+    
+    $file=storage_path("monitor_cron_job.txt");
+    
+  
+    
+   $date = Carbon::now( );
+     
+
+$str= $date ." (". $date->tzName.")";
+
+
+        file_put_contents($file, $str );
+        
+        
+        
+}
+
+
+}
+
+
+
+
+if (! function_exists('last_cron_run_time')) {
+    
+       function last_cron_run_time( )
+{ 
+        $file=storage_path("monitor_cron_job.txt");
+    
+return file_get_contents($file);
+        
+        
+}
+
+
+}
+
+
+
+
+
+if (! function_exists('current_time')) {
+    
+       function current_time( )
+{ 
+        $date = Carbon::now( );
+     
+
+$str= $date ." (". $date->tzName.")";
+
+
+return $str;
+        
+        
+}
+
+
+}
+
+
+
+
+
+
+
+
+

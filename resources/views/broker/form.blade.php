@@ -239,14 +239,8 @@
 </div>
 
 
-           
- <?php
- 
- $dt=new DateTimeZone();
-var_dump(   $dt->getName());
-
-?>        
-        
+   
+    
         <div class="form-group  mb-3">
         
   <label for="saksh_timezone" class="form-label">timezone</label>

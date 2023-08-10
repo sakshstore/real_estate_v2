@@ -120,228 +120,51 @@
                        
                        
                        </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>Date Of Birth:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->date_of_birth }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>Address:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->address }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>City:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->city }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>State:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->state }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>Country:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->country }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>Pin:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->pin }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>Referral:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->referral }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>Selected Plan:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->selected_plan }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>Annual Earning:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->annual_earning }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>Total Experience:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->total_experience }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>Timezone:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->timezone }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>Avatar:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->avatar }}
-                       </td>
-                       
-                       
-                       </tr>
-                       <tr>
-                       
-                       
-                       <td>
-                            <strong>User Id:</strong>
-                          
-                       
-                       </td>
-                       
-                       
-                       <td>
-                       
-                         {{ $broker->user_id }}
-                       </td>
-                       
-                       
-                       </tr>
+                     
 
                   
                 </table>
+                
+                
+                
+                
+								<div class="card mt-2">
+								    
+								      	<div class="card-body">
+									    
+									     <h5 class="text-heading mb-4">Additional Details</h5>
+									     
+									               
+                <table class="table"> 
+			 	     
+									     <?php
+									     
+									     
+				  $data= json_decode( $broker->form_json );
+		 if(is_array($data))
+		 {
+				  foreach($data as  $x => $val)
+				  {
+				      
+				  echo "  <tr> <td>   ";    
+				     echo $x;
+			 
+				    
+                     echo "  </td>   <td> ";
+                       
+				  if(is_string($val)) echo $val;
+		 
+				     echo "  </td> </tr> ";
+				  }
+		 
+		 }
+				  ?>
+				           </table>
+				   	      
+							    
+									    </div>
+								 
+									   	</div>
+									  			     
+									  			     
 @endsection

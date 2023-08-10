@@ -38,7 +38,41 @@
   body{
       
       font-family: 'Ubuntu', sans-serif;
+       color:rgb(10, 37, 64); 
+       
+    
+     
   }
+  
+.table tbody td  
+      {
+          
+           color:rgb(10, 37, 64); 
+      }
+      
+      .sb-sidenav-dark{
+          
+          color:#fff;
+            
+       
+       
+      } 
+      
+  .sb-sidenav .sb-sidenav-menu .nav .nav-link {
+          
+          color:#fff;
+            
+        
+      }
+      
+ .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon{
+          
+             
+          color:#fff; 
+      }
+      
+      
+     
 </style>
            
     </head>
@@ -52,9 +86,9 @@
             <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 
               <a class=" text-white nav-link  " > 
-              
-               
-         Last Login {{ Auth::user()->last_login_at }}  
+        
+       Server Time {{  current_time( )  }}
+        
                 
                  </a>
             </div>
