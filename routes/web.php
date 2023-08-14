@@ -40,7 +40,9 @@ use App\Http\Controllers\SubscriptionController;
 
 
 use App\Http\Controllers\CustomformController;
+use App\Http\Controllers\OrderController;
 
+use App\Http\Controllers\PayPalController;
 
 
 /*
@@ -54,6 +56,17 @@ use App\Http\Controllers\CustomformController;
 |
 */
 
+    
+    
+  Route::get('schedule_run', function () {
+
+    \Artisan::call('schedule:run');
+
+    dd("schedule_run");
+
+});  
+    
+    
  
   
  Route::get('/', [PageController::class, 'homepage'])->name('homepage'); 
@@ -87,6 +100,11 @@ Route::get('register_as_broker',[ BrokerController::class,'register_as_broker'])
 
 Route::post('register_as_broker_post',[ BrokerController::class,'register_as_broker_post'])->name("register_as_broker_post") ;
 
+ 
+  Route::post('validate_broker_registeration',[ BrokerController::class,'validate_broker_registeration'])->name("validate_broker_registeration") ;
+    
+ 
+ 
 
     
  Route::view('login_with_otp', 'auth.login_with_otp')->name('login_with_otp');
@@ -119,8 +137,16 @@ Route::get('our_brokers', [BrokerController::class, 'our_brokers']   )->name('ou
 
 
 
+
+
+
+
+Route::prefix('auth')->group(function () {
  
 Route::middleware(['auth' ])->group(function () {
+     
+     
+     
      
 
 
@@ -130,23 +156,63 @@ Route::middleware(['auth' ])->group(function () {
  Route::get('login_history', [AuthController::class, 'login_history'])->name('login_history'); 
  
 
- 
+Route::get('profile', [AuthController::class, 'getprofile']   )->name('profile');;
     
+Route::get('profile/edit', [AuthController::class, 'getprofileEdit']   )->name('profile.edit') ;
+    
+Route::post('profile/edit', [AuthController::class, 'postprofileEdit']   )->name('profile.edit') ;
+
+
+ //Route::get('subscriptions_plan', [SubscriptionController::class, 'subscriptions_plan'])->name('subscriptions_plan');  
+ 
+ 
+ Route::get('make_payment', [PayPalController::class, 'make_payment'])->name('subscriptions_plan');  
+ 
+ Route::middleware([ 'CheckUser' ])->group(function () {
+     
+     
+ 
  
 
-
-
-Route::prefix('admin')->group(function () {
-Route::middleware(['role:admin'])->group(function () {
+Route::controller(PayPalController::class)
+    ->prefix('paypal')
+    ->group(function () {
+         Route::view('paymentw', 'paypal.index')->name('make_paymentw');
+          Route::view('payment', 'paypal.status')->name('status');
+        
+         
+        
+        Route::post('handle-payment', 'handlePayment')->name('make.payment');
+        Route::get('cancel-payment', 'paymentCancel')->name('cancel.payment');
+        Route::get('payment-success', 'paymentSuccess')->name('success.payment');
+    });
     
+    
+   
+  
+ });
+    
+      
      
     
+    
+     
+     
+     
+ 
+    
+    
+ Route::middleware(['role:admin|Executive','CheckUser' ])->group(function () {
+ 
+    
+     
+     
     Route::resource('properties', PropertyController::class) ;
         Route::resource('leads', LeadController::class) ;
     
+        Route::resource('orders', OrderController::class) ;
     
  
-
 
     
 Route::post('/set_lead_status/{lead}', [LeadController::class, 'set_lead_status'])->name('set_lead_status');
@@ -185,11 +251,27 @@ Route::post('/properties/{property}/remove_brochure_url', [PropertyController::c
  
  
 Route::post('/properties/{property}/post_brochure', [PropertyController::class, 'post_brochure'])->name('post_brochure');   
-});
-
+ 
  
 Route::post('remove_connectivity/{property}', [PropertyController::class, 'remove_connectivity']   )->name('remove_connectivity'); 
  
+ 
+Route::patch('aminities_update/{property}', [PropertyController::class, 'aminities_update']   )->name('aminities_update'); 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+});
+
+
+Route::middleware(['role:admin'])->group(function () {
+    
+    
+    
+    
 Route::get('section_settings', [PropertyController::class, 'section_settings'])->name('section_settings');
  
 Route::post('post_logo_slider_images', [PropertyController::class, 'post_logo_slider_images'])->name('post_logo_slider_images');
@@ -216,16 +298,7 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     Route::post('settings_logo',[ SettingsController::class,'settings_logo'])->name("settings_logo") ;
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
     
     
     Route::resource('subscriptions', SubscriptionController::class) ;
@@ -237,8 +310,7 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     Route::resource('pages', PageController::class) ;
     
     
-    Route::resource('faqs', FaqController::class) ;
-    Route::resource('leads', LeadController::class) ;
+    Route::resource('faqs', FaqController::class) ; 
     
     
     Route::resource('posts', PostController::class) ;
@@ -305,9 +377,7 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     Route::resource('customforms', CustomformController::class) ;
 
 Route::post('set_form_fields/{customform}', [CustomformController::class, 'set_form_fields']   )->name('set_form_fields'); 
-
- // for designer end
-
+ 
 
 Route::resource('users', UserController::class) ;
 
@@ -318,8 +388,7 @@ Route::resource('permissions', PermissionController::class) ;
 
 
  
- 
-
+  
 
 
 Route::post('users/filter', [UserController::class, 'get_user_list_after_filter']   )->name('get_user_list_after_filter'); 
@@ -336,3 +405,18 @@ Route::get('susend_user/{user}/{status}', [UserController::class, 'susend_user']
 
     
 }); 
+
+
+
+}); 
+
+
+
+
+
+
+
+
+
+
+

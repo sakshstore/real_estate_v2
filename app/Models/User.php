@@ -10,6 +10,14 @@ use Laravel\Sanctum\HasApiTokens;
  
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Tags\HasTags;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Post;
+use App\Models\Subscriber;
+use App\Models\LoginHistory;
+
+
+
+
 class User extends Authenticatable  implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable  , HasRoles , HasTags; 
@@ -45,4 +53,39 @@ class User extends Authenticatable  implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    
+    
+    
+        public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+    
+    
+    
+    
+        public function properties(): HasMany
+    {
+        return $this->hasMany(Property::class,"broker_id");
+    }
+    
+    
+    
+    
+            public function subscriber(): hasOne
+    {
+        return $this->hasOne(Subscriber::class);
+    }
+    
+    
+    
+    
+    
+        public function  login_histories(): HasMany
+    {
+        return $this->hasMany(LoginHistory::class );
+    }
+    
+    
 }

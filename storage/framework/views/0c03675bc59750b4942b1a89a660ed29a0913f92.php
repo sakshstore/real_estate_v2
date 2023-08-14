@@ -1,13 +1,6 @@
 <?php $__env->startSection('content'); ?>
     
     
-<?php
-
- $user=\Auth()->user();
- 
- 
- 
- ?>
  
  
  <div class="row">
@@ -25,6 +18,9 @@
                                    
                                 </div>
                                 </div > 
+     
+     
+     
      
      <div class="col-3">
          
@@ -54,7 +50,8 @@
                                 </div> 
                                 </div> 
                                 
-                                
+                                                            
+                         <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'admin')): ?>     
                                 <div class="col-3"> <div class="card text-bg-dark">
                                     <div class="card-body">
                                      
@@ -65,24 +62,23 @@
                                        
                                    
                                 </div> 
-                                </div > 
+                                </div> 
+                                <?php endif; ?>
                                 
-                                
+                                         
+                       
                                 
                                 
                                 <div class="col-3">   <div class="card text-bg-dark">
                                     <div class="card-body">
                                      
-                                                <h5 class="text-muted  "  >Tatal Call back requests</h5>
-                                                <h3 class="my-2 py-1"><?php echo e(count($leads)); ?>   </h3>
+                                                <h5 class="text-muted  "  >available_listing</h5>
+                                                <h3 class="my-2 py-1"><?php echo e($available_listing); ?>   </h3>
                                                 
                                             </div>
                                        
                                    
                                 </div></div>
-                                
-                                
-                                
                                 
                                 <div class="col-3">   <div class="card text-bg-dark">
                                     <div class="card-body">
@@ -98,52 +94,124 @@
                                 
                                 
                                 
-                                
-                                </div>
+                                      </div>
         
-    
  
-     <h3>Recent Leads</h3>
-   
+ 
+ <div class="row">
+     <div class="col-6">
+                           
 
-                        <div class="table-responsive">
-                            <table class="table table-bordered ">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-                                        
-										<th>Name</th>
-										<th>Email</th>
-										<th>Phone</th>
-									 
-										<th>IP Address</th>
-										<th>Request URL</th>
-<th> Time zone</th>
-                                         
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $__currentLoopData = $leads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lead): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <tr>
-                                            <td><?php echo e($lead->id); ?></td>
-                                            
-											<td><?php echo e($lead->name); ?></td>
-											<td><?php echo e($lead->email); ?></td>
-											<td><?php echo e($lead->phone); ?></td>
-										 
-										 
-											<td><?php echo e($lead->ip_address); ?></td>
-											<td><?php echo e($lead->request_url); ?></td>
-											<td><?php echo e($lead->timezone); ?></td>
+    <canvas id="myChart" height="100px"></canvas>
+  </div>    
+  
+  
+  
+                         <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasAnyRole', 'Executive|admin')): ?>     
+                                
+  <div class="col-6">
+      
+    property_submission  <?php echo e($subscription->property_submission); ?>
+
+      
+   
  
-                                        </tr>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </tbody>
-                            </table>
-                        </div>
+                             </div>
+                             
+                             
+                                
+                                <?php endif; ?>
+                                
+                                
+                             </div>
                         
     
     
+<?php $__env->stopSection(); ?>
+
+
+
+
+
+
+<?php $__env->startSection('scripts'); ?>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  
+
+<script type="text/javascript">
+
+  
+
+      var labels =  <?php echo e(Js::from($labels)); ?>;
+
+      var users =  <?php echo e(Js::from($data)); ?>;
+
+  
+
+      const data = {
+
+        labels: labels,
+
+        datasets: [{
+
+          label: 'New System Users',
+
+          backgroundColor: 'rgb(255, 99, 132)',
+
+          borderColor: 'rgb(255, 99, 132)',
+
+          data: users,
+
+        }]
+
+      };
+
+  
+
+ 
+
+  const config = {
+  type: 'bar',
+  data: data,
+  options: {
+      
+       
+    animations: {
+      tension: {
+        duration: 2000,
+        easing: 'linear',
+        from: 1,
+        to: 0,
+        loop: true
+      }
+    },
+    scales: {
+      y: { // defining min and max so hiding the dataset does not change scale range
+        min: 0,
+        max: 100
+      }
+    }
+  }
+};
+
+      const myChart = new Chart(
+
+        document.getElementById('myChart'),
+
+        config
+
+      );
+
+  
+
+</script>
+ 
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app-master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/saksbqic/services/resources/views/user/home.blade.php ENDPATH**/ ?>

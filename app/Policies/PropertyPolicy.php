@@ -45,9 +45,12 @@ class PropertyPolicy
      */
     public function create(User $user)
     {
- 
- 
+  return true;
+ if(available_listing($user->id)> 0)
          return true;
+         else
+         return false;
+         
     }
 
     /**
@@ -60,7 +63,8 @@ class PropertyPolicy
     public function update(User $user, Property $property)
     { 
  
-        return false;
+      
+        return true;
     }
 
     /**

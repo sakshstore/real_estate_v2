@@ -6,15 +6,11 @@
    
    
                  
-                      
-                             
-                                <a href="<?php echo e(route('brokers.create')); ?>" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  <?php echo e(__('Create New')); ?>
-
-                                </a>
-                              
+                       
                   
-
+  <a href="<?php echo e(route('users.create')); ?>" class="btn btn-primary btn-sm float-right w-100 mt-2">Add new user</a>
+           
+            
 
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">

@@ -20,6 +20,28 @@ use App\Models\User;
 class PayPalController extends Controller
 {
  
+    public function make_payment(Request $request)
+    {
+                
+  
+   
+	$user=	Auth::user();
+  
+         
+        
+       $subscriptions = Subscription::all();
+       
+        
+      
+
+        return  view('paypal.index',compact('user','subscriptions' ))
+            ->with('success', 'Broker created successfully.');
+        
+    }
+    
+    
+    
+    
     public function handlePayment(Request $request)
     {
       

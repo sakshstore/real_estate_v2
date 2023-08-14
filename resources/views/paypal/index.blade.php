@@ -11,10 +11,7 @@
  
              
                                 
-                                               {{ $user->name}} 
-                                                     
-                                              <br>Invoice #{{ $user->id}}
-                                              <br>{{ $user->created_at}}
+                                
                                                             
 <section class="posts-subscription">
         <div class="container">

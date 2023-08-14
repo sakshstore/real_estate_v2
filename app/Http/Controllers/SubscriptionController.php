@@ -24,6 +24,19 @@ class SubscriptionController extends Controller
         return view('subscription.index', compact('subscriptions'))
             ->with('i', (request()->input('page', 1) - 1) * $subscriptions->perPage());
     }
+    
+    
+    
+    
+     public function subscriptions_plan()
+    {
+        $subscriptions = Subscription::all();
+
+        return view('subscription.subscriptions_plan', compact('subscriptions') );
+    }
+    
+    
+    
 
     /**
      * Show the form for creating a new resource.

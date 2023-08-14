@@ -5,17 +5,8 @@
 <?php $__env->startSection('content'); ?>
    
    
-                 
-                            <span id="header">
-                                <?php echo e(__('Order')); ?>
-
-                            </span>
-
-                             
-                                <a href="<?php echo e(route('orders.create')); ?>" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  <?php echo e(__('Create New')); ?>
-
-                                </a>
+   
+                              
                               
                   
 
@@ -25,37 +16,37 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                   	<th>Payment Reference Id</th>
-										<th>Payment Status</th>
+                                   	<th>Subscription_id</th>
+										<th>Payment ID</th>
 									
 									 
-										<th>Status</th>
+										<th>payment_status</th>
 									 
+								 
                                         <th>Amount</th>
+                                        <th>created_at</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
                                              
-											<td><?php echo e($order->id); ?></td>
+											<td>  <?php echo e($order->id); ?></td>
 										  	<td><?php echo e($order->subscription_id); ?></td>
-											<td><?php echo e($order->payment_reference_id); ?></td>
+											<td> <?php echo e($order->payment_gateway); ?>  <?php echo e($order->payment_id); ?> </td>
 										
 									 
 											<td><?php echo e($order->payment_status); ?></td>
 									 
 											<td><?php echo e($order->amount); ?></td>
 									 
- 
+ 	<td><?php echo e($order->created_at); ?></td>
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
                     
-                <?php echo $orders->links(); ?>
-
              
 <?php $__env->stopSection(); ?>
 

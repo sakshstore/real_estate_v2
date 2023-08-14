@@ -3,13 +3,6 @@
 @section('content')
     
     
-<?php
-
- $user=\Auth()->user();
- 
- 
- 
- ?>
  
  
  <div class="row">
@@ -27,6 +20,9 @@
                                    
                                 </div>
                                 </div > 
+     
+     
+     
      
      <div class="col-3">
          
@@ -56,7 +52,8 @@
                                 </div> 
                                 </div> 
                                 
-                                
+                                                            
+                         @role('admin')     
                                 <div class="col-3"> <div class="card text-bg-dark">
                                     <div class="card-body">
                                      
@@ -67,24 +64,23 @@
                                        
                                    
                                 </div> 
-                                </div > 
+                                </div> 
+                                @endrole
                                 
-                                
+                                         
+                       
                                 
                                 
                                 <div class="col-3">   <div class="card text-bg-dark">
                                     <div class="card-body">
                                      
-                                                <h5 class="text-muted  "  >Tatal Call back requests</h5>
-                                                <h3 class="my-2 py-1">{{ count($leads) }}   </h3>
+                                                <h5 class="text-muted  "  >available_listing</h5>
+                                                <h3 class="my-2 py-1">{{ $available_listing }}   </h3>
                                                 
                                             </div>
                                        
                                    
                                 </div></div>
-                                
-                                
-                                
                                 
                                 <div class="col-3">   <div class="card text-bg-dark">
                                     <div class="card-body">
@@ -100,50 +96,121 @@
                                 
                                 
                                 
-                                
-                                </div>
+                                      </div>
         
-    
  
-     <h3>Recent Leads</h3>
-   
+ 
+ <div class="row">
+     <div class="col-6">
+                           
 
-                        <div class="table-responsive">
-                            <table class="table table-bordered ">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-                                        
-										<th>Name</th>
-										<th>Email</th>
-										<th>Phone</th>
-									 
-										<th>IP Address</th>
-										<th>Request URL</th>
-<th> Time zone</th>
-                                         
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($leads  as $lead)
-                                        <tr>
-                                            <td>{{  $lead->id }}</td>
-                                            
-											<td>{{ $lead->name }}</td>
-											<td>{{ $lead->email }}</td>
-											<td>{{ $lead->phone }}</td>
-										 
-										 
-											<td>{{ $lead->ip_address }}</td>
-											<td>{{ $lead->request_url }}</td>
-											<td>{{ $lead->timezone }}</td>
+    <canvas id="myChart" height="100px"></canvas>
+  </div>    
+  
+  
+  
+                         @hasanyrole ('Executive|admin')     
+                                
+  <div class="col-6">
+      
+    property_submission  {{$subscription->property_submission}}
+      
+   
  
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                             </div>
+                             
+                             
+                                
+                                @endhasanyrole
+                                
+                                
+                             </div>
                         
     
     
+@endsection
+
+
+
+
+
+
+@section('scripts')
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  
+
+<script type="text/javascript">
+
+  
+
+      var labels =  {{ Js::from($labels) }};
+
+      var users =  {{ Js::from($data) }};
+
+  
+
+      const data = {
+
+        labels: labels,
+
+        datasets: [{
+
+          label: 'New System Users',
+
+          backgroundColor: 'rgb(255, 99, 132)',
+
+          borderColor: 'rgb(255, 99, 132)',
+
+          data: users,
+
+        }]
+
+      };
+
+  
+
+ 
+
+  const config = {
+  type: 'bar',
+  data: data,
+  options: {
+      
+       
+    animations: {
+      tension: {
+        duration: 2000,
+        easing: 'linear',
+        from: 1,
+        to: 0,
+        loop: true
+      }
+    },
+    scales: {
+      y: { // defining min and max so hiding the dataset does not change scale range
+        min: 0,
+        max: 100
+      }
+    }
+  }
+};
+
+      const myChart = new Chart(
+
+        document.getElementById('myChart'),
+
+        config
+
+      );
+
+  
+
+</script>
+ 
 @endsection

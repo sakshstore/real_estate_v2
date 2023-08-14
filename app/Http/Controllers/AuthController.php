@@ -19,9 +19,14 @@ use Illuminate\Support\Facades\Mail;
 use App\Notifications\ChangePasswordNotifications; 
 
 use App\Mail\SakshMail;
- 
+ use DB;
 use App\Models\Lead;
 use App\Models\Property;
+
+use App\Models\Customform;
+use App\Models\Order;
+
+use App\Models\Subscription;
 
 class AuthController extends Controller
 {
@@ -29,23 +34,77 @@ class AuthController extends Controller
        public function home()
     {
 
-
+  
  
+  $user=Auth::User();
+  
  
-$login_histories = LoginHistory::where("user_id",Auth::user()->id)->latest()->take(5)->get();
+$login_histories = LoginHistory::where("user_id",$user->id)->latest()->take(5)->get();
           
+          
+          return "";
 
     $properties = Property::orderBy("id","desc")->get();
           
-
+$roles = $user->getRoleNames(); // Returns a collection
         
-        $leads = Lead::orderBy('created_at', 'desc')->take(15)->get();
+      //  $leads = Lead::orderBy('created_at', 'desc')->take(15)->get();
         
       
         
    $last_cron_run_time=  last_cron_run_time( );
+   
+   
+   
+           $users = User::select(DB::raw("COUNT(*) as count"), DB::raw("Month(created_at) Month  "))
+
+                  
+
+                    ->groupBy(DB::raw("Month(created_at)"))
+
+                    ->pluck('count', 'Month');
+
+
  
-        return view('user.home', compact('login_histories','properties','leads','last_cron_run_time'));
+
+        $labels = $users->keys();
+
+        $data = $users->values();
+        
+      
+        
+            $order=Order::where("broker_id",$user->id )->first();
+        if($order)
+        {
+        $subscription_id=$order->subscription_id;
+        
+            $subscription=Subscription::where("id",$subscription_id )->first();
+        
+        
+        $total_property_submission=$subscription->property_submission;
+        
+  $properties = Property::where("payment_id",$order->payment_id)->where("broker_id",$user->id)->orderBy("id","desc")->get();
+          
+    $total_submitted_property_with_new_order=count(    $properties);
+    
+    
+    
+   $available_listing=$total_property_submission-  $total_submitted_property_with_new_order;
+     
+ //  $available_listing=available_listing($user->id);
+    
+        }
+        else
+        {
+            
+            $subscription=Subscription::where("id",1 )->first();
+        
+         $available_listing=0;
+         
+        }
+        return view('user.home', compact('login_histories','properties', 'last_cron_run_time','roles','user','labels','data','subscription','available_listing'));
+        
+      
     }
     
      public function login_history()
@@ -112,8 +171,7 @@ $res=false;
         
         
    $user=User::where("email",$email)->first();
-  // var_dump($user->id);
-   
+  
    
    
    if(!$user)
@@ -130,15 +188,10 @@ $res=false;
 
       Auth::login($user);
       
-      $roles = $user->getRoleNames(); // Returns a collection
-      
-      
-      
-
-            return redirect('/home');
+ 
+            return redirect()->route("home")  ->with('success','Login success ');
             
-            
-    //return redirect()->back() ->with('success','Login success ');
+             
     
     }
     
@@ -173,9 +226,7 @@ $res=false;
        $user->username= $email;
        
        $user->email= $email;
-       
-       
-       
+        
        $user->save();
        
        
@@ -231,5 +282,80 @@ $res=false;
         
         
     }
+    
+    
+    
+    
+    
+    
+    
+     public function getprofile()
+    {
+            
+$user = Auth::user();
+
+ return view('user.profile',compact('user')) ;
+    }
+    
+    
+    
+    
+    
+    
+    
+       public function getprofileEdit()
+    {
+            
+$user = Auth::user();
+
+      $customform=  Customform::where("form_name","user_profile")->first();
+        
+ 
+         return view('user.profile_edit',compact('user','customform')) ;
+    }  
+    
+    
+    
+    
+    
+    public function postprofileEdit(Request $request)
+    {
+         
+   
+  
+            
+$user = Auth::user();
+ 
+ 
+        
+            
+      $request_data=$request->except('_method', '_token')  ;
+       
+       
+       $user->form_json=json_encode($request_data);
+              
+ 
+ 
+ $user->assignRole('Executive');
+ $user->save();
+ 
+ 
+ 
+       $user->save();
+        
+   
+   
+   
+   
+  
+  
+ return redirect()->back()->with('success','Updated successfully.');
+       
+
+   // return redirect()->route('profile') ->with('success','Profile updated successfully.');
+    
+     
+    }
+    
     
 }

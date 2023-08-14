@@ -28,7 +28,11 @@ class BrokerController extends Controller
      */
     public function index()
     {
-        $brokers = Broker::paginate();
+      //  $brokers = User::paginate();
+        
+        $brokers = User::role('Executive')->paginate(); 
+        
+        
 
         return view('broker.index', compact('brokers'))
             ->with('i', (request()->input('page', 1) - 1) * $brokers->perPage());

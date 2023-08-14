@@ -17,6 +17,7 @@ use App\Models\Customform;
 
 
 use App\Models\User;
+use App\Models\Order;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 /**
  * Class PropertyController
@@ -405,7 +406,15 @@ $permission=$user->can('create' ,$property);
      
        $property->developer=$request->developer;//
        
-       $property->broker_id=$request->broker_id;//
+       $property->broker_id=$user->id;//
+       
+       
+         
+            $order=Order::where("broker_id",$user->id )->where("payment_status","COMPLETED")->first();
+        
+        
+        
+       $property->payment_id=$order->payment_id;//
        
        
        
@@ -828,6 +837,7 @@ public function viewProperty(Property $property){
     
     public function edit($id)
     {
+         
         $property = Property::find($id);
         
         
@@ -862,9 +872,39 @@ $amminities_array=get_amminities_tags();
      * @param  Property $property
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Property $property)
+    public function aminities_update(Request $request, Property $property)
     {
+    //   return 868;
        
+            $user=Auth::user();
+ 
+$permission=$user->can('update' ,$property);
+ if(!$permission)
+            abort(403);
+            
+            
+             return $request->aminities;
+             
+ 
+       
+       $property->aminities=implode(",",get_value_array_from_tag( $request->aminities));
+       
+ return  $property->aminities;
+       
+       
+       
+       
+        $property->save();
+        
+    
+ return redirect()->route('properties.edit',$property->id)
+          ->with('success', 'Property created successfully.');
+    }
+    
+    
+       public function update(Request $request, Property $property)
+    {
+    //   return 868;
        
             $user=Auth::user();
  
@@ -879,7 +919,7 @@ $permission=$user->can('update' ,$property);
             request()->validate(Property::$rules);
 
         
-        $property->update($request->all());
+      //  $property->update($request->all());
  
        
        $property->project_tags=implode(",",get_value_array_from_tag( $request->project_tags));
@@ -890,14 +930,10 @@ $permission=$user->can('update' ,$property);
         
     
  return redirect()->route('properties.edit',$property->id)
-          ->with('success', 'Property created successfully.');
+         ->with('success', 'Property created successfully.');
+    
+    
     }
-    
-    
-    
-    
-    
-    
     
  public function post_set_update_other_fields(Request $request, Property $property)
     {

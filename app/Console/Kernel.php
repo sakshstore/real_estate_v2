@@ -36,7 +36,8 @@ class Kernel extends ConsoleKernel
          Send_schedules_Wapp_messages(  );
          
          process_auto_posts();
-        })->everyMinute();
+        })->everyMinute()->sendOutputTo(
+            "kernal_schedule.txt"); 
      
     }
 

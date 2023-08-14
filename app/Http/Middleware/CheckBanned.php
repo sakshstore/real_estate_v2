@@ -20,18 +20,10 @@ class CheckBanned
         $user=Auth::User();
         
         
-        if($user && ($user->status ==  "Banned")){
-            Auth::logout();
-
-            $request->session()->invalidate();
-
-            $request->session()->regenerateToken();
-
-            return redirect()->route('login')->with('error', 'Your Account is suspended, please contact Admin.');
-
+         if ( $user->hasAnyRole(['super-admin', 'admin']) ) {
+            return $next($request);
         }
 
-        return $next($request);
-         
+        return redirect('/');
     }
 }

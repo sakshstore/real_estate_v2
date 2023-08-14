@@ -14,12 +14,16 @@
                             
                             
                             
-                             
+                            <a class="nav-link" href="<?php echo e(route('subscriptions_plan')); ?>">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
+                                Subscriptions plans
+                            </a>
+                    
 
-
+                         <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasAnyRole', 'Executive|admin')): ?>  
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             
-                            
+                             
                             <a class="nav-link" href="<?php echo e(route('leads.index')); ?>">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-address-card"></i></div>
                                 Leads
@@ -31,71 +35,71 @@
                                 Properties
                             </a>
                                 
-                            <a class="nav-link" href="<?php echo e(route('orders.index')); ?>">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
+                            <a class="nav-link" href="<?php echo e(route('orders.index')); ?>"> 
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-shop"></i></div>
                                 orders
                             </a>
-                            
-                            <a class="nav-link" href="<?php echo e(route('login_history')); ?>">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
-                                Login History
-                            </a>      <a class="nav-link" href="<?php echo e(route('login_history')); ?>">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
-                               Profile
-                            </a>
+                            <?php endif; ?>
+
+                           
                             
                          <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'admin')): ?>     
                             <a class="nav-link" href="<?php echo e(route('brokers.index')); ?>">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-person"></i></div>
                                 Brokers
                             </a>
                               
-                            <div class="sb-sidenav-menu-heading">Website </div>
+                            <div class="sb-sidenav-menu-heading">Manage Sections </div>
                           
                               
                
                
 
-<li  > <a href="<?php echo e(route('pages.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon">  <i class="fa-solid fa-file"></i>   </div>Manage Pages</a></li>
+<li  > <a href="<?php echo e(route('pages.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon">  <i class="fa-solid fa-file"></i>   </div> Pages</a></li>
 
 
    
     
 
-<li  > <a href="<?php echo e(route('posts.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage posts</a></li>
+<li  > <a href="<?php echo e(route('posts.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-file"></i></div> posts</a></li>
 
 
 
-<li  > <a href="<?php echo e(route('auto_posts.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage Auto posts</a></li>
+<li  > <a href="<?php echo e(route('auto_posts.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-pen"></i></div> Auto posts</a></li>
 
 
 
-<li  > <a href="<?php echo e(route('testimonials.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage testimonials</a></li>
+<li  > <a href="<?php echo e(route('testimonials.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-comment"></i></div> testimonials</a></li>
 
 
 
-<li  > <a href="<?php echo e(route('bulk_messages.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage bulk_messages</a></li>
+<li  > <a href="<?php echo e(route('teams.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div> teams</a></li>
 
 
 
-<li  > <a href="<?php echo e(route('teams.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage teams</a></li>
+<li  > <a href="<?php echo e(route('faqs.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div> Faq</a></li>
+
+
+                            <div class="sb-sidenav-menu-heading">Manage Tools </div>
+                          
 
 
 
-<li  > <a href="<?php echo e(route('faqs.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage Faq</a></li>
+
+<li  > <a href="<?php echo e(route('bulk_messages.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div> Bulk messages</a></li>
 
 
 
-<li  > <a href="<?php echo e(route('subscriptions.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage subscription</a></li>
+<li  > <a href="<?php echo e(route('subscriptions.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-cart-plus"></i></div>Subscription</a></li>
 
 
-<li  > <a href="<?php echo e(route('subscribers.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage subscriber</a></li>
+<li  > <a href="<?php echo e(route('subscribers.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-envelope"></i></div> Subscriber</a></li>
 
 
-<li  > <a href="<?php echo e(route('customforms.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>Manage customforms</a></li>
+<li  > <a href="<?php echo e(route('customforms.index')); ?>"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-wpform"></i></div> Custom forms</a></li>
 
                  <?php endif; ?> 
-                 
+               
                  
 
    <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'admin')): ?>
@@ -129,7 +133,17 @@
                  
                  <?php endif; ?>
                  
-                 
+                  <a class="nav-link" href="<?php echo e(route('login_history')); ?>">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
+                                Login History
+                            </a>      <a class="nav-link" href="<?php echo e(route('profile')); ?>">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
+                               Profile
+                            </a>
+                            
+                            
+                            
+                            
                         </div>
                     </div>
                     
@@ -138,7 +152,7 @@
                     
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                     <?php echo e(Auth::user()->name); ?>
+                     <?php echo e(Auth::user()->email); ?>
 
                     </div>
                 </nav><?php /**PATH /home/saksbqic/services/resources/views/layouts/partials/admin_nav.blade.php ENDPATH**/ ?>

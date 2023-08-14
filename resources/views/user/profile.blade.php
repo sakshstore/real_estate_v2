@@ -47,7 +47,13 @@ Profile
     
     
 </table>
- <a class="btn btn-primary" href="/profile/edit"> Edit</a>
+@php
+
+    print_form_json_data( $user->form_json);
+    @endphp
+    
+    
+ <a class="btn btn-primary" href="{{route('profile.edit')}}"> Edit</a>
 
 
         </div>

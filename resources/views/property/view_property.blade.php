@@ -230,24 +230,10 @@
 									     
 			 	     
 									     <?php
+									     print_form_json_data( $property->overview_custom_fields);
 									     
 									     
-				  $data= json_decode( $property->overview_custom_fields );
-			//	  print_r($data);
-				  foreach($data as  $x => $val)
-				  {
-				      echo "<hr />";
-				      
-				     echo $x;
-				//  var_dump($x);
-				  
-				  if(is_string($val)) echo $val;
-			
-		 
-				      
-				  }
-		 
-				  
+								
 				  ?>
 				  
 				   	      

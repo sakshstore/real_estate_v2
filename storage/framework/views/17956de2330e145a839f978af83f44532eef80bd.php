@@ -10,12 +10,7 @@
  
              
                                 
-                                               <?php echo e($user->name); ?> 
-                                                     
-                                              <br>Invoice #<?php echo e($user->id); ?>
-
-                                              <br><?php echo e($user->created_at); ?>
-
+                                
                                                             
 <section class="posts-subscription">
         <div class="container">

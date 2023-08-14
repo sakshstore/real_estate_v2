@@ -20,10 +20,29 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate();
+        
+         
+        $user=Auth::User();
+        
+         //if( $request->route()=="profile")    return $next($request);
+         
+        if($user && (   $user->hasRole([ 'admin'])   )  )   {
+           
+           
+           
+        $orders = Order::all();
+        
+        }
+        
+        
+        else
+        {
+            
+            
+        $orders = Order::where("broker_id",$user->id)->get();
+        }
 
-        return view('order.index', compact('orders'))
-            ->with('i', (request()->input('page', 1) - 1) * $orders->perPage());
+        return view('order.index', compact('orders')) ;
     }
 
     /**

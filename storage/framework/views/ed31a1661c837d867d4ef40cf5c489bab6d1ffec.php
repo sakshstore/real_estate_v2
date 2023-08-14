@@ -4,12 +4,9 @@
 
 <?php $__env->startSection('content'); ?>
   
-              
-               <div class="container">
-               <div class="mt-5">
+        
                    <h2> Register as a broker </h2>
-                   </div>
-                   
+                  
                    <div class="row">
                    
                 
@@ -35,7 +32,9 @@
         
                         </form>
                         
-</div></div></div>
+</div></div>
+
+
 <?php $__env->stopSection(); ?>
 
 

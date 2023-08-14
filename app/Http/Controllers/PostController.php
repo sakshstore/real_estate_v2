@@ -136,7 +136,25 @@ $post->user_id=$user->id;
      */
     public function get_post(Post $post)
     {
-        //$post = Post::find($id);
+        
+           $user=User::where("id",109)->first();
+   
+   dd($user->properties);
+   
+   
+   
+   //  $post = Post::find($id);
+   
+   
+//   $post = Post::where("id",$post->id)->with(['user'])->first();
+   
+   //$post = Post::where("id",$post->id)->with(['user'])->first();
+
+   
+   
+   
+   dd($post->toArray());
+   
     views($post)->record();
         return view('post.blog_view', compact('post'));
     }

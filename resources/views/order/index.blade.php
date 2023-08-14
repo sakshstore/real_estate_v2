@@ -7,15 +7,8 @@
 @section('content')
    
    
-                 
-                            <span id="header">
-                                {{ __('Order') }}
-                            </span>
-
-                             
-                                <a href="{{ route('orders.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
+   
+                              
                               
                   
 
@@ -25,35 +18,36 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                   	<th>Payment Reference Id</th>
-										<th>Payment Status</th>
+                                   	<th>Subscription_id</th>
+										<th>Payment ID</th>
 									
 									 
-										<th>Status</th>
+										<th>payment_status</th>
 									 
+								 
                                         <th>Amount</th>
+                                        <th>created_at</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
                                         <tr>
                                              
-											<td>{{ $order->id }}</td>
+											<td>  {{ $order->id }}</td>
 										  	<td>{{ $order->subscription_id }}</td>
-											<td>{{ $order->payment_reference_id }}</td>
+											<td> {{ $order->payment_gateway }}  {{ $order->payment_id }} </td>
 										
 									 
 											<td>{{ $order->payment_status }}</td>
 									 
 											<td>{{ $order->amount }}</td>
 									 
- 
+ 	<td>{{ $order->created_at }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     
-                {!! $orders->links() !!}
              
 @endsection
