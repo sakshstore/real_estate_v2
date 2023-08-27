@@ -7,6 +7,11 @@ use App\Models\Property;
 use Illuminate\Http\Request;
  use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+
+
+use App\Events\LeadCreated;
+
+
 /**
  * Class LeadController
  * @package App\Http\Controllers
@@ -33,6 +38,10 @@ class LeadController extends Controller
 $permission=$user->can('viewAny' ,$lead);
 
  
+       $status_array=explode(",",  getLeadStatus()); 
+
+ 
+       $tags_array=explode(",",  getLeadTags()); 
 
  if($permission)
  
@@ -40,7 +49,6 @@ $permission=$user->can('viewAny' ,$lead);
      
      
     
-       
         
          
         
@@ -78,7 +86,7 @@ $permission=$user->can('viewAny' ,$lead);
      
  }
 
-        return view('lead.index', compact('leads')) ; 
+        return view('lead.index', compact('leads','status_array','tags_array')) ; 
     }
 
     /**
@@ -125,7 +133,7 @@ $permission=$user->can('viewAny' ,$lead);
       
         $lead->email=$request->email;
         $lead->phone=$request->phone;
-        $lead->service_id=$request->service_id;
+        $lead->property_id=100;//$request->property_id;
         $lead->request_url= $request->path(); 
         $lead->ip_address=$request->ip();
         
@@ -137,7 +145,11 @@ $permission=$user->can('viewAny' ,$lead);
         
            $lead->save();
            
-           
+               event(new LeadCreated($lead));
+               
+               
+               
+               
            return redirect()->back( )
             ->with('success', 'Thanks Our service agent will contact you.');
             
@@ -165,7 +177,7 @@ $permission=$user->can('viewAny' ,$lead);
       
         $lead->email=$request->email;
         $lead->phone=$request->phone;
-        $lead->service_id=$request->property_id;
+        $lead->property_id=$request->property_id;
         $lead->request_url= $request->path(); 
         $lead->ip_address=$request->ip();
         
@@ -176,6 +188,7 @@ $permission=$user->can('viewAny' ,$lead);
         
            $lead->save();
            
+               event(new LeadCreated($lead));
         $property = Property::find($request->property_id);
            
            
@@ -218,7 +231,7 @@ $permission=$user->can('viewAny' ,$lead);
         
         
         $lead->phone=$request->phone;
-        $lead->service_id=$request->property_id;
+        $lead->property_id=$request->property_id;
         $lead->request_url= $request->path(); 
         $lead->ip_address=$request->ip();
         
@@ -229,7 +242,7 @@ $permission=$user->can('viewAny' ,$lead);
         
            $lead->save();
            
-           
+               event(new LeadCreated($lead));
            return redirect()->back( )
             ->with('success', 'Thanks Our service agent will contact you.');
             

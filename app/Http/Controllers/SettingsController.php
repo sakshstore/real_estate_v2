@@ -60,6 +60,7 @@ class SettingsController extends Controller
            $settings->recaptcha_key=DotenvEditor::getValue('GOOGLE_RECAPTCHA_KEY'); 
         $settings->recaptcha_secret=DotenvEditor::getValue('GOOGLE_RECAPTCHA_SECRET'); 
         
+            $settings->lead_tags=DotenvEditor::getValue('LEAD_TAGS'); 
         
         
         //$keys = DotenvEditor::getKeys();
@@ -135,6 +136,27 @@ $editor->save();
         
     }
     
+    
+        
+      public function settings_master(Request $request)
+    {
+        
+         
+
+
+           $editor = DotenvEditor::setKeys([
+     'LEAD_TAGS' =>  $request->lead_tags,
+       'LEAD_STATUS' =>  $request->lead_status
+    
+]);
+     
+
+$editor->save();
+        
+     return redirect()->back() ->with('success', 'Updated successfully.');  
+        
+        
+    }
     
     
     public function settings_recaptcha(Request $request)

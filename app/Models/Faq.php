@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Faq extends Model
 {
+    use SoftDeletes;
+    
     
     static $rules = [
 		'question' => 'required',
@@ -28,6 +30,9 @@ class Faq extends Model
     ];
 
     protected $perPage = 20;
+    
+        protected $dates = ['deleted_at'];
+        
 
     /**
      * Attributes that should be mass-assignable.

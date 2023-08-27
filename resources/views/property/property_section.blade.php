@@ -21,14 +21,20 @@
       <p class="card-text"> 
       
       
-     
+    
       
    {{ $property->property_type }} in {{ $property->address }} <br />
      {{ $property->unit_details }} 
      </p>  
     </div>
     <div class="card-footer">
-      <small class="text-muted">Starting Price {{ get_price($property )}}</small>
+      <small class="text-muted">Starting Price 
+      
+      
+      {{ get_price($property )}} 
+      
+      
+      </small>
     </div>
   </div>
   

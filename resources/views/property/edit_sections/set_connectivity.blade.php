@@ -1,61 +1,54 @@
-
  
-
+   
+   <form  target="_blank" action="{{ route('update_connectivity',$property->id) }}" method="POST">    @csrf
+         {{ method_field('PATCH') }}
  
-
-
-<form method="POST" action="{{ route('update_connectivity', $property->id) }}"  role="form" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
-                            @csrf
-
-                                   <div class="col-md-12   mb-5">
-  <label for="aminities" class="form-label">Connectivity</label>
-  
-  
-   <input type="text" class="form-control connectivity_tags tags" id="connectivity" name="connectivity_name"    >  
    
    
-   <label for="aminities" class="form-label">Distance</label>
-  
-  
-   <input type="text" class="form-control  " id="connectivity_distance" name="connectivity_distance"    >
+   @php
+   $con= json_decode($property->connectivities );
    
- 
-   <input type="submit" class=" btn w-100  btn-primary" id="connectivity" value="save" >
-   
-   </div></form>
+   @endphp
    <table class="table table-bordered">
       
 @php
 
-$connectivities=json_decode($property->connectivities);
-
-if(is_array($connectivities))
+ 
+foreach( $connectivity_array as $connectivity)
+ 
 {
-foreach( $connectivities as $connectivity)
-
-if(isset($connectivity->name))
-{
-
 @endphp
 
 
  <tr>
      
-     <td> {{ $connectivity->name}}  </td>
+     <td> {{ $connectivity}}  </td>
  
- 
- <td>{{ $connectivity->distance}}</td>
- 
+  
  
  <td>     
 
+<?php
 
-<form  target="_blank" action="{{ route('remove_connectivity',$property->id) }}" method="POST">    @csrf
 
-<input type="hidden"  name="connectivity_name"  value="{{ $connectivity->name}}" /> 
+if(isset($con->$connectivity))
+{
+$value=$con->$connectivity;
+}
+else
+{
+    
+    $value=0;
+}
+ 
+
+?>
+ 
+ 
+<input type="text"  name="connectivity_distance[{{ $connectivity}}]" 
+value="{{$value}}" /> 
                                                     
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                  
                                                 </form> 
                                                 
                                                 
@@ -63,17 +56,20 @@ if(isset($connectivity->name))
                                                 
                                                 
                                                 @php
-
-}
+ 
 }
 @endphp
              
    </table>           
+     <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-fw fa-home"></i> {{ __('submit') }}</button>
    
    
    
    
    
+ 
+                                                
+                        
    
  
                                                 

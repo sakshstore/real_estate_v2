@@ -13,10 +13,14 @@
                             
                             
                             
+                            <a class="nav-link" target="_blank" href="{{ route('homepage') }}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-page"></i></div>
+                                View Page
+                            </a>
                             
                             <a class="nav-link" href="{{ route('subscriptions_plan') }}">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
-                                Subscriptions plans
+                                Subscriptions
                             </a>
                     
 
@@ -44,7 +48,7 @@
                            
                             
                          @role('admin')     
-                            <a class="nav-link" href="{{ route('brokers.index') }}">
+                            <a class="nav-link" href="{{ route('users.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-person"></i></div>
                                 Brokers
                             </a>
@@ -151,7 +155,7 @@
                     
                     
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                     {{ Auth::user()->email }}
+                        <div class="small">Version:</div>
+                   {{ env('APP_VERSION')}}
                     </div>
                 </nav>

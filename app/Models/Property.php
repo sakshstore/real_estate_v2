@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 /**
@@ -41,7 +42,8 @@ use CyrildeWit\EloquentViewable\Contracts\Viewable;
 class Property extends Model implements Viewable
 {
       use InteractsWithViews;
- 
+   use SoftDeletes;
+    
     static $rules = [
     ];
 
@@ -58,7 +60,7 @@ class Property extends Model implements Viewable
     'project_name','project_details','aminities','bathrooms','gallery_url','garage','property_thumbnail_url','status','brochure_url',
     'broker_id','developer','tags','project_tags','payment_id'];
 
-
+    protected $dates = ['deleted_at'];
 
     public function broker()
     {
@@ -66,5 +68,10 @@ class Property extends Model implements Viewable
     }
     
     
+    
+        public function   leads(): HasMany
+    {
+        return $this->hasMany(Lead::class );
+    }
     
 }

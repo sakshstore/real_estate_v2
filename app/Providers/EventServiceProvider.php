@@ -16,6 +16,13 @@ use App\Listeners\LogOutListener;
  
 use App\Listeners\RegisteredListener;
 
+use App\Listeners\PaymentListener;
+
+use App\Events\PaymentUpdates;
+use App\Events\LeadCreated;
+
+use App\Listeners\Subscribeto3rdParty;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -33,7 +40,15 @@ class EventServiceProvider extends ServiceProvider
             RegisteredListener::class,
         ],
         
+php artisan make:listener  --event=PaymentUpdates
+
    */
+   
+   PaymentUpdates::class => [PaymentListener::class],
+   
+   LeadCreated::class => [Subscribeto3rdParty::class],
+   
+   
         Login::class => [
          LoginListener::class,
         ],

@@ -12,9 +12,10 @@
 										<th>Phone</th>
 										<th>Service ID</th>
 										<th>User ID</th>
-										<th>IP Address</th>
-										<th>Request URL</th>
-<th> Time zone</th><th>Refer</th>
+									 	<th>Request URL</th>
+     
+                                        <th></th>  
+                                        <th></th>    
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -26,51 +27,98 @@
 											<td>{{ $lead->name }}</td>
 											<td>{{ $lead->email }}</td>
 											<td>{{ $lead->phone }}</td>
-											<td>{{ $lead->service_id }}</td>
+											<td>{{ $lead->property_id }}</td>
 											<td>{{ $lead->user_id }}</td>
-											<td>{{ $lead->ip_address }}</td>
-											<td>{{ $lead->request_url }}</td>
-											<td>{{ $lead->timezone }}</td>
-											<td>{{ $lead->refer }}</td>
-
+									 		<td>{{ $lead->request_url }}</td>
+										 
                                             <td>
                             
+                            
+                 
+  
         
         
     <form action="{{ route('set_lead_tags',$lead->id) }}" method="POST">
                                                     
                                                     @csrf
-                                                    
+                                                   
                                                        <div class="mb-3">
-            <label for="status" class="col-form-label">Tags</label>
+            <label for="tags" class="col-form-label">Tags</label>
            
-        <input type="text" class="form-control status_tags" value="{{ $lead->tags }}" name="tags" >
-              
+           
+           <select   name="tags"  class="form-select" aria-label="Default select example"> 
+  
+  
+  @foreach ($tags_array as $tag_element)
+  
+  
+  @if($tag_element==$lead->tags) 
+  <option value="{{$tag_element}}" selected>{{$tag_element}}</option>
+  @else
+  
+  <option value="{{$tag_element}}"  >{{$tag_element}}</option>
+  
+  @endif
+  
+  @endforeach
+ 
+</select>
+
+        
           </div>
            
    
-  <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-fw fa-home"></i> Update Tags</button>
+  <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-fw fa-home"></i>Set</button>
   
-  <hr />
+ 
                                                 </form>
         
-        
+</td>
+
+
+<td>
     <form action="{{ route('set_lead_status',$lead->id) }}" method="POST">
                                                     
                                                     @csrf
-                                                    
+                                                
                                                        <div class="mb-3">
             <label for="status" class="col-form-label">Status</label>
            
-        <input type="text" class="form-control status_tags" value="{{ $lead->status }}" name="status" >
+     
+     
+     
+ <select   name="status"  class="form-select" aria-label="Default select example"> 
+  
+  
+  @foreach ($status_array as $status_element)
+  
+  
+  @if($status_element==$lead->status) 
+  <option value="{{$status_element}}" selected>{{$status_element}}</option>
+  @else
+  
+  <option value="{{$status_element}}"  >{{$status_element}}</option>
+  
+  @endif
+  
+  @endforeach
+ 
+</select>
+
+        
+        
+        
+        
               
           </div>
            
    
-  <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-fw fa-home"></i> update_status</button>
+  <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-fw fa-home"></i> Set</button>
                                                 </form>
         
-          <hr />
+      </td>
+      
+      <td> 
         
                                                 <form action="{{ route('leads.destroy',$lead->id) }}" method="POST">
                                                     

@@ -46,8 +46,14 @@
 
                                             <td>
                                                 <form action="{{ route('pages.destroy',$page->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('pages.show',$page->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('get_page_by_id',$page->id) }}"><i class="fa fa-fw fa-eye"></i>   Public View</a>
+                                                    
+                                                           <a class="btn btn-sm btn-primary " href="{{ route('pages.show',$page->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                           
+                                                           
+                                                           
                                                     <a class="btn btn-sm btn-success" href="{{ route('pages.edit',$page->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('load_editor',$page->id) }}"><i class="fa fa-fw fa-edit"></i> Edit Contents</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>

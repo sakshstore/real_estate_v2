@@ -62,11 +62,11 @@ class PageController extends Controller
  
  
         
-       $popular_properties= Property::where('tags', 'like', '%popular%')->where("status","Published")->get();
+      // $popular_properties= Property::where('tags', 'like', '%popular%')->where("status","Published")->get();
     
  
         
-       $popular_properties= Property::where("status","Published")->get();
+      $popular_properties= Property::where("status","Published")->get();
     
         
        $posts= Post::where("status","Published")->get();
@@ -119,7 +119,17 @@ class PageController extends Controller
         $page = new Page();
         return view('page.create', compact('page'));
     }
-
+    
+    
+    
+    
+    
+    
+    
+ public function save_editor()
+    {
+        return "1";
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -141,8 +151,8 @@ class PageController extends Controller
 $page=new Page();
 
 $page->title=$request->title;
-$page->content=$request->content;
-$page->thumbnail=$request->thumbnail;
+//$page->content=$request->content;
+//$page->thumbnail=$request->thumbnail;
 
 $page->slug=Str::slug( $request->title);
 
@@ -178,6 +188,8 @@ $page->user_id=$user->id;
         
         
         
+        
+        
         return view('page.edit', compact('page'));
     }
 
@@ -195,11 +207,69 @@ $page->user_id=$user->id;
         
         
         
+        
+        
+  //$json= file_get_contents(storage_path()."page_data/data.json" );
+  
+ $file = storage_path("page_data/".$page->id."_data.json");
+
+  $json= file_get_contents($file);
+  
+   
+  $obj=json_decode($json);
+  
+ 
+  
+  $page->css= $obj->pagesHtml->css;
+  $page->html= $obj->pagesHtml->html;
+  
+  
+  return $page;
+  
+  
+        
         return view('page.page_view', compact('page'));
 
        
     }
+ public function get_page_by_id(Page $page)
+    {
+     
+  
+        SEOTools::setTitle($page->title);
+        
+        SEOTools::opengraph()->setUrl('http://current.url.com');
+        SEOTools::setCanonical('https://codecasts.com.br/lesson');
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::twitter()->setSite('@susheelhbti');
+        SEOTools::jsonLd()->addImage('https://codecasts.com.br/img/logo.jpg');
+        
+        
+        
+        
+        
+  //$json= file_get_contents(storage_path()."page_data/data.json" );
+  
+ $file = storage_path("page_data/".$page->id."_data.json");
 
+  $json= file_get_contents($file);
+  
+   
+  $obj=json_decode($json);
+  
+ $page->obj=$obj->pagesHtml[0];
+  
+ $page->css= $obj->pagesHtml[0]->css;
+ $page->html= $obj->pagesHtml[0]->html;
+  
+   
+  
+  
+        
+        return view('page.page_view', compact('page'));
+
+       
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -236,8 +306,8 @@ $page->user_id=$user->id;
  
 
 $page->title=$request->title;
-$page->content=$request->content;
-$page->thumbnail=$request->thumbnail;
+//$page->content=$request->content;
+//$page->thumbnail=$request->thumbnail;
 
 $page->slug=str_slug( $request->title);
 
@@ -273,4 +343,68 @@ $page ->delete();
         return redirect()->route('pages.index')
             ->with('success', 'Page deleted successfully');
     }
+    
+    
+    
+    
+    
+    
+    
+      public function load_editor(Page $page)
+    {
+           $user=Auth::User();
+           if ($user->cannot('create' )) {
+               //  abort(403); 
+           
+        }
+        
+         
+        return view('page.load_editor', compact('page'));
+    }
+    
+    
+    
+    
+    public function store_grapejs(Page $page  )
+    {
+   
+    
+$json = file_get_contents('php://input');
+
+
+ $file = storage_path("page_data/".$page->id."_data.json");
+
+
+   file_put_contents($file,$json);
+  
+    }
+    
+    
+  
+    public function load_grapejs(Page $page  )
+    {
+   
+    
+  //$json= file_get_contents(storage_path()."page_data/data.json" );
+  
+ $file = storage_path("page_data/".$page->id."_data.json");
+
+  $json= file_get_contents($file);
+  
+   
+  $obj=json_decode($json);
+  
+  $data=$obj->data;
+  
+  return json_encode($data);
+  
+   
+          
+          
+          
+    }
+    
+    
+    
+    
 }

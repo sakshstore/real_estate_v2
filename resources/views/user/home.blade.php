@@ -74,7 +74,7 @@
                                 <div class="col-3">   <div class="card text-bg-dark">
                                     <div class="card-body">
                                      
-                                                <h5 class="text-muted  "  >available_listing</h5>
+                                                <h5 class="text-muted  "  >Available listing</h5>
                                                 <h3 class="my-2 py-1">{{ $available_listing }}   </h3>
                                                 
                                             </div>
@@ -161,9 +161,9 @@
 
         datasets: [{
 
-          label: 'New System Users',
+          label: 'New Registered Users',
 
-          backgroundColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'RGB(33, 37, 41) ',
 
           borderColor: 'rgb(255, 99, 132)',
 
@@ -194,8 +194,7 @@
     },
     scales: {
       y: { // defining min and max so hiding the dataset does not change scale range
-        min: 0,
-        max: 100
+      
       }
     }
   }

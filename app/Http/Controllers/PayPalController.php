@@ -7,6 +7,7 @@ use  Log;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
+use App\Events\PaymentUpdates;
 
 
  use Illuminate\Support\Facades\Auth;
@@ -106,6 +107,9 @@ class PayPalController extends Controller
  Log::debug("response_log".print_r($response,true));
  
  
+           
+               event(new PaymentUpdates($response));
+               
  
                return redirect()->away($links['href']);
                 }
@@ -148,6 +152,8 @@ class PayPalController extends Controller
              
          
             
+           
+               
             $order=Order::where("payment_id",$response['id'] )->first();
    $order->payment_status="COMPLETED";
    
@@ -165,6 +171,12 @@ class PayPalController extends Controller
  
  $user->assignRole('Executive');
  $user->save();
+               
+               
+               
+               event(new PaymentUpdates($response));
+               
+               
                
             return redirect()
                 ->route('home')

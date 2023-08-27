@@ -37,29 +37,7 @@
 
            
  
-        
-   
-
-           
-     <div class="form-group  mb-3">
-        
-  <label for="saksh_content" class="form-label">Content</label>
-  
-    <textarea  class="form-control  editor   ($errors->has('content') ? ' is-invalid' : '')  "   name="content"  id="saksh_content" rows="10">{{ $page->content }}   </textarea>
-    
-     
-  
-    {!! $errors->first('content', '<div class="invalid-feedback">:message</div>') !!}
-</div>
-        
-     
-
-
-           
- 
-        
-        
-       
+         
 
 
            
@@ -74,34 +52,4 @@
     </section>
 @endsection
 
-
-@section('scripts')
-    
  
-
-         
-  <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
- 
-<script> 
- 
-
-
-    ClassicEditor
-        .create( document.querySelector( '.editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-        
-         
-          
-	
-	
-	
-
-</script>
-
-
-
-
-@endsection
-

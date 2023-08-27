@@ -21,6 +21,12 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
     
+    
+    protected $table = 'pages3';
+    
+    
+    
+    
     static $rules = [
 		'title' => 'required',
 		'user_id' => 'required',

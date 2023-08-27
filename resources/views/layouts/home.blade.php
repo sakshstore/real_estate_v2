@@ -77,6 +77,8 @@ font-family: 'Roboto Condensed', sans-serif;
  
   
   
+    @include('layouts.partials.model')
+  
     @include('layouts.partials.footer')
   
 </div> 
@@ -93,7 +95,11 @@ font-family: 'Roboto Condensed', sans-serif;
 
  
      @yield("scripts") 
-          <script> /*
+          <script> 
+     
+ 
+
+/*
     var url = '//sakshamapp.com/js/wati.js';
                 var s = document.createElement('script');
                 s.type = 'text/javascript';
@@ -133,6 +139,6 @@ font-family: 'Roboto Condensed', sans-serif;
                 */
                 </script>  
   
- 
+  
   </body>
 </html>

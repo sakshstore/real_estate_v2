@@ -21,6 +21,9 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="pills-recaptcha-tab" data-bs-toggle="pill" data-bs-target="#pills-recaptcha" type="button" role="tab" aria-controls="pills-recaptcha" aria-selected="false">Recaptcha Settings </button>
   </li>
+   <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-master-tab" data-bs-toggle="pill" data-bs-target="#pills-master" type="button" role="tab" aria-controls="pills-master" aria-selected="false">Master </button>
+  </li>
   
   
   <li class="nav-item" role="presentation">
@@ -44,6 +47,10 @@
 
   <div class="tab-pane fade" id="pills-recaptcha" role="tabpanel" aria-labelledby="pills-recaptcha-tab" tabindex="0">
     @include('settings.recaptcha')</div>
+    
+
+  <div class="tab-pane fade" id="pills-master" role="tabpanel" aria-labelledby="pills-master-tab" tabindex="0">
+    @include('settings.master')</div>
     
     
     

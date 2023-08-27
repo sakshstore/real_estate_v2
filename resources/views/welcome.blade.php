@@ -530,9 +530,10 @@ margin-bottom: 10px;
     
 $(document).ready(function(){
     
+ setTimeout(function() {    $('#subscriberModal').modal('show'); }, 5000);
+   
+
  
-    
-    
       $(".carousel-item:first").addClass("active");
       
      $("#testimonial_carousel  .carousel-item:first").addClass("active");

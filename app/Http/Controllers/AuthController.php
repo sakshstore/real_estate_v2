@@ -28,25 +28,41 @@ use App\Models\Order;
 
 use App\Models\Subscription;
 
+use MailchimpTransactional\ApiClient ;
+
+
+
 class AuthController extends Controller
 {
     //
        public function home()
     {
-
-  
+ 
+ 
+ 
  
   $user=Auth::User();
   
  
-$login_histories = LoginHistory::where("user_id",$user->id)->latest()->take(5)->get();
+        $available_listing=available_listing($user );
+ 
+ 
+ 
+  
+ $login_histories = $user->login_histories;
+ 
+ 
+ $roles = $user->getRoleNames(); // Returns a collection
+ 
+ $orders=$user->orders ;
+ $properties=$user->properties ;
+ 
+ 
+ $subscription=$user->subscription;
+ 
+  
           
-          
-          return "";
 
-    $properties = Property::orderBy("id","desc")->get();
-          
-$roles = $user->getRoleNames(); // Returns a collection
         
       //  $leads = Lead::orderBy('created_at', 'desc')->take(15)->get();
         
@@ -56,13 +72,14 @@ $roles = $user->getRoleNames(); // Returns a collection
    
    
    
-           $users = User::select(DB::raw("COUNT(*) as count"), DB::raw("Month(created_at) Month  "))
+        // graph data start
+        
+        
+        $users = User::select(DB::raw("COUNT(*) as count"), DB::raw("Monthname(created_at) Monthname  "))
 
-                  
+                  ->groupBy(DB::raw("Monthname(created_at)"))
 
-                    ->groupBy(DB::raw("Month(created_at)"))
-
-                    ->pluck('count', 'Month');
+                    ->pluck('count', 'Monthname');
 
 
  
@@ -71,37 +88,17 @@ $roles = $user->getRoleNames(); // Returns a collection
 
         $data = $users->values();
         
-      
-        
-            $order=Order::where("broker_id",$user->id )->first();
-        if($order)
-        {
-        $subscription_id=$order->subscription_id;
-        
-            $subscription=Subscription::where("id",$subscription_id )->first();
+        // graph data end
         
         
-        $total_property_submission=$subscription->property_submission;
-        
-  $properties = Property::where("payment_id",$order->payment_id)->where("broker_id",$user->id)->orderBy("id","desc")->get();
-          
-    $total_submitted_property_with_new_order=count(    $properties);
-    
-    
-    
-   $available_listing=$total_property_submission-  $total_submitted_property_with_new_order;
-     
- //  $available_listing=available_listing($user->id);
-    
-        }
-        else
-        {
-            
-            $subscription=Subscription::where("id",1 )->first();
-        
-         $available_listing=0;
+   
+       
          
-        }
+        
+        
+         
+        
+        
         return view('user.home', compact('login_histories','properties', 'last_cron_run_time','roles','user','labels','data','subscription','available_listing'));
         
       
@@ -349,7 +346,7 @@ $user = Auth::user();
    
   
   
- return redirect()->back()->with('success','Updated successfully.');
+ return redirect()->route('home')->with('success','Updated successfully.');
        
 
    // return redirect()->route('profile') ->with('success','Profile updated successfully.');

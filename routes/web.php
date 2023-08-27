@@ -66,14 +66,20 @@ use App\Http\Controllers\PayPalController;
 
 });  
     
+       Route::get('load_grapejs/{page}',[ PageController::class,'load_grapejs'])->name("load_grapejs2") ;
     
+  
  
   
  Route::get('/', [PageController::class, 'homepage'])->name('homepage'); 
   
  
-
+     Route::post('save_editor',[ PageController::class,'save_editor'])->name("save_editor") ;
+    
  
+
+Route::get('/test1', [PropertyController::class, 'test1'])->name('test1');
+
 
 
 Route::get('/property/{property}', [PropertyController::class, 'viewProperty'])->name('viewProperty');
@@ -118,7 +124,12 @@ Route::post('verify_login_with_otp', [AuthController::class, 'verify_login_with_
 
     
     
+    
+    
+    
  Route::get('page/{page:slug}',  [PageController::class, 'get_page_by_slug'])->name('get_page_by_slug'); 
+    
+ Route::get('page/{page}',  [PageController::class, 'get_page_by_id'])->name('get_page_by_id'); 
     
     
     
@@ -250,6 +261,13 @@ Route::post('/properties/{property}/remove_brochure_url', [PropertyController::c
 
  
  
+ 
+ 
+Route::get('/properties/{id}/restore', [PropertyController::class, 'restore_property'])->name('restore_property');   
+
+
+Route::delete('/properties/{id}/forced_destroy', [PropertyController::class, 'forced_destroy'])->name('forced_destroy');   
+ 
 Route::post('/properties/{property}/post_brochure', [PropertyController::class, 'post_brochure'])->name('post_brochure');   
  
  
@@ -296,6 +314,7 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
     
     Route::post('settings_logo',[ SettingsController::class,'settings_logo'])->name("settings_logo") ;
+    Route::post('settings_master',[ SettingsController::class,'settings_master'])->name("settings_master") ;
     
     
      
@@ -308,6 +327,13 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
     
     Route::resource('pages', PageController::class) ;
+    
+    Route::get('editor/{page}',[ PageController::class,'load_editor'])->name("load_editor") ;
+    Route::post('store_grapejs/{page}',[ PageController::class,'store_grapejs'])->name("store_grapejs") ;
+    Route::get('load_grapejs/{page}',[ PageController::class,'load_grapejs'])->name("load_grapejs") ;
+    
+      //  Route::post('save_editor',[ PageController::class,'save_editor'])->name("save_editor") ;
+     
     
     
     Route::resource('faqs', FaqController::class) ; 

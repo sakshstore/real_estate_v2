@@ -40,7 +40,7 @@
 									 
 											<td>{{ $order->payment_status }}</td>
 									 
-											<td>{{ $order->amount }}</td>
+											<td>{{ $order->amount }} {{ $order->currency }}</td>
 									 
  	<td>{{ $order->created_at }}</td>
                                         </tr>

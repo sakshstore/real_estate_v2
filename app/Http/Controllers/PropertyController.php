@@ -14,9 +14,11 @@ use Illuminate\Http\Request;
  
  
 use App\Models\Customform;
+use App\Models\Subscription;
 
 
 use App\Models\User;
+use App\Models\Faq;
 use App\Models\Order;
 use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 /**
@@ -25,7 +27,23 @@ use Jackiedo\DotenvEditor\Facades\DotenvEditor;
  */
 class PropertyController extends Controller
 {
-    /**
+    
+    
+    
+    function test1(){
+  
+  $user=User::find(109);
+ 
+        Auth::login($user);
+    
+    
+   return  available_listing(  $user);
+    
+      
+        
+    }
+    /*
+     * *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -58,10 +76,34 @@ $permission=$user->can ('viewAny' ,$property);
         $properties = Property::where("user_id",$user_id)->orderBy("id","desc")->paginate();
         
         
-         
-     
         
-      return view('property.index', compact('properties'))
+        
+        
+ //if($permission)
+            
+        
+    //  $thrashed_properties = Property::trashed();
+      
+        
+       // else
+        
+    //    
+    //    $thrashed_properties = Property::where("user_id",$user_id)->orderBy("id","desc")->trashed();
+         
+         
+        
+        
+   $thrashed_properties = Property::onlyTrashed()->get();
+      
+    //  return $thrashed_properties;
+      
+      
+     // $thrashed_properties = Property::withTrashed()->get();
+                
+                
+                
+        
+      return view('property.index', compact('properties','thrashed_properties'))
             ->with('i', (request()->input('page', 1) - 1) * $properties->perPage());
     
         
@@ -305,7 +347,36 @@ $editor->save();
 }
 
 
+  public function restore_property(Request $request,  $id )
+    {
+        
+        Property::withTrashed()
+        ->where('id', $id)
+        ->restore();
+        
+        
+        
+    
+  return redirect()->back( )
+          ->with('success', 'Property restored successfully.');
+ 
+    }  
 
+  public function forced_destroy(Request $request,  $id )
+    {
+        
+        Property::withTrashed()
+        ->where('id', $id)
+        ->forceDelete();
+        
+        
+        
+    
+  return redirect()->back( )
+          ->with('success', 'Property permanently successfully.');
+ 
+    }  
+    
 
     public function propertyarchive(Request $request)
     {
@@ -361,8 +432,7 @@ $permission=$user->can('create' ,$property);
      
         
     
-        
-        $connectivity_array=get_connectivity_tags(); 
+       $connectivity_array=get_connectivity_tags(); 
 
 $amminities_array=get_amminities_tags(); 
 
@@ -449,7 +519,7 @@ $permission=$user->can('create' ,$property);
          
          
           
-    return redirect()->route('properties.edit_property', [$new_property]);
+    return redirect()->route('properties.edit', [$new_property]);
     }
 
   public function publish_property(Property $property)
@@ -710,56 +780,7 @@ return "Uploaded succesfully";
 }
 
 
-
-public function remove_connectivity(Request $request,Property $property){
-    
-    
-   $user=Auth::user();
  
-$permission=$user->can('update' ,$property);
- if(!$permission)
-            abort(403);
-            
-    
-    
-  $connectivities= json_decode( $property->connectivities);
-  
-  $new_connectivities=array();
-  
-  
- 
-  foreach($connectivities  as $element)
-  {
-   
-     
-      if( $request->connectivity_name ==  $element->name    )
-      {
-        
-         
-          
-      }
-      else
-      {
-          
-          
-          
-        
-           
-      array_push($new_connectivities,$element);
-      }
-  }
-  
-  
-  $property->connectivities=json_encode($new_connectivities);
-  
-   $property->save();
-    
-   
-  return   $property->connectivities. "Removed";
-    
-    
-    
-}
 
 
 
@@ -771,25 +792,9 @@ $permission=$user->can('update' ,$property);
  if(!$permission)
             abort(403);
             
-    $connectivity=array();
-    
-    
-    
-         $connectivity['name']=get_value_array_from_tag(   $request->connectivity_name)[0];
-         
-         $connectivity['distance']= $request->connectivity_distance;
-         
+   
           
-       
-      
-         $connectivities=json_decode(  $property->connectivities );
-          
-      
-          $connectivities[]=$connectivity;
-          
-          
-          
- $property->connectivities= json_encode( $connectivities);
+ $property->connectivities= json_encode( $request->connectivity_distance);
  
     $property->save();
     
@@ -855,12 +860,22 @@ $permission=$user->can('update' ,$property);
             
             		$customform = Customform::first();
             
-$connectivity_array=get_connectivity_tags(); 
+            
+            $connectivities_values=array();
+            
+            
+            
+$connectivity_array=array("one","two","three","five","six","seven");
+
+
+$currency_array=getCurrency();
+
+
 
 $amminities_array=get_amminities_tags(); 
  
  
-        return view('property.edit_property', compact('property','connectivity_array','amminities_array', 'customform'));
+        return view('property.edit_property', compact('property','connectivity_array','amminities_array', 'customform','currency_array'));
     }
     
     
@@ -882,14 +897,12 @@ $permission=$user->can('update' ,$property);
  if(!$permission)
             abort(403);
             
-            
-             return $request->aminities;
              
  
        
        $property->aminities=implode(",",get_value_array_from_tag( $request->aminities));
        
- return  $property->aminities;
+ 
        
        
        
@@ -904,7 +917,7 @@ $permission=$user->can('update' ,$property);
     
        public function update(Request $request, Property $property)
     {
-    //   return 868;
+     
        
             $user=Auth::user();
  
@@ -914,12 +927,13 @@ $permission=$user->can('update' ,$property);
             
             
             
-  
+       
+     $property->update($request->all());
+      
+       $property->starting_price=json_encode($request->starting_price);
             
-            request()->validate(Property::$rules);
-
-        
-      //  $property->update($request->all());
+            
+             
  
        
        $property->project_tags=implode(",",get_value_array_from_tag( $request->project_tags));
@@ -965,7 +979,7 @@ $permission=$user->can('update' ,$property);
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Property $property)
     {
         
                  
@@ -980,7 +994,7 @@ $permission=$user->can('delete' ,$property);
             
             
             
-        $property = Property::find($id)->delete();
+        $property = $property->delete();
 
         return redirect()->route('properties.index')
             ->with('success', 'Property deleted successfully');

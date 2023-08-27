@@ -96,12 +96,11 @@ class UserController extends Controller
     { 
     
     
-      $login_history = LoginHistory::where("user_id",$user->id)->latest()->take(10)->get( );
+     // $login_history = LoginHistory::where("user_id",$user->id)->latest()->take(10)->get( );
       
       
         return view('users.show', [
-            'user' => $user ,
-            'login_history' => $login_history
+            'user' => $user  
         ]);
     }
 

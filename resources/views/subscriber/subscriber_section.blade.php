@@ -1,5 +1,5 @@
  
-   <form method="POST" action="{{ route('subscribers.store') }}"  role="form" enctype="multipart/form-data"   class="row gx-3 gy-2 align-items-center">
+   <form method="POST" action="{{ route('subscribers.store') }}"  role="form" enctype="multipart/form-data"   class="row gx-3 gy-2 ">
                             @csrf
                             
                             

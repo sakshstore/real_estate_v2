@@ -47,6 +47,8 @@ Profile
     
     
 </table>
+
+ 
 @php
 
     print_form_json_data( $user->form_json);

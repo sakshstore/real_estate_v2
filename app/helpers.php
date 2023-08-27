@@ -16,8 +16,14 @@ use App\Models\Post;
 
 use App\Models\AutoPost;
 
+use App\Models\User;
+use App\Models\Order;
+
 use App\Models\BulkMessage;
 
+ 
+  
+  
 if (!function_exists("get_message_from_chatgpt")) {
     function get_message_from_chatgpt($message)
     {
@@ -80,13 +86,28 @@ if (!function_exists("plural_from_model")) {
 }
 
 if (!function_exists("get_price")) {
-    function get_price($property)
+    function get_price($property,$coin="USD")
     {
+        
+       
+
+
+
         $price_array = json_decode($property->starting_price);
+        
+if(  isset( $price_array->$coin) )        
+     
+     
+  return    $price_array->$coin . " ".$coin;
+   else  
+    
+    return $property->starting_price;
+   
+   
+    
+    
 
-        return $price_array->usd . " USD  or " . $price_array->aed . " AED";
-
-        //  return  number_format($price_array->usd) ." USD " . number_format($price_array->aed )." AED" ;
+      
     }
 }
 
@@ -377,10 +398,7 @@ if (!function_exists("sendlog")) {
         Log::debug("sendlog___" . print_r($to, true));
 
         Log::debug("sendlog___" . __LINE__);
-
-        Log::debug("sendlog___" . print_r($to, true));
-        Log::debug("sendlog___" . __LINE__);
-
+ 
         Log::debug("sendlog___" . print_r($body, true));
 
         Log::debug("sendlog___" . __LINE__);
@@ -592,25 +610,170 @@ function print_form($form_array, $data_json)
 
 
 	     
-									     function print_form_json_data( $form_json){
-				  $data= json_decode( $form_json );
+ function print_form_json_data( $form_json){
+     
+     
+				  $data= json_decode( $form_json ); 
 				  
-				  if(!is_array($data)) return "";
-			//	  print_r($data);
+			  if(!$data) return "";
 				  foreach($data as  $x => $val)
 				  {
 				       
+				       
+				       if(!isset($x)) break;
 				      echo "<hr />";
 				      
 				     echo $x;
-				//  var_dump($x);
+			 
 				  echo "   ";
 				  if(is_string($val)) echo $val;
 			
 		 
-				      
 				  }
+				  
+	 
+				  
+		  
+	 
+				  
+				  
+				 
 		 
-									     }
+			 }
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+				 
+			 
+		function available_listing(User $user)
+		{
+		    
+		   $user_id=$user->id;
+ 
+  $subscription_available=0;
+  
+		    $sum_properties=0;
+		     
+		     
+		     
+  $orders=$user->orders;
+  
+
+            foreach($orders as $order)
+            {
+                   
+    $payment_id=$order->payment_id;
+ 
+        
+        
+  $sum_properties =$sum_properties + Property::where("payment_id",$payment_id) ->count();
+          
+          
+  $subscription=$order->subscription;
+   
+
+$subscription_available=$subscription_available+$subscription->property_submission;
+          
+           
+            }
+    
+    $total_used=$sum_properties;
+    
+    
+    $unused= $subscription_available- $total_used;
+    
+    
+    return $unused;
+    
+		}	 
+			 
+			 
+			 
+			 
+			 
+		function available_listing_NEW(User $user)
+		{
+		    
+		   
+		    
+            $order=Order::where("broker_id",$user->id )->first();
+    
+    
+    $subscription=$user->subscription;
+    
+    if(!$subscription)
+         return 0;
+         
+               $total_property_submission=$subscription->property_submission;
+         
+        if($order)
+           
+        
+    $payment_id=$order->payment_id;
+    else
+    
+    $payment_id= null;
+    
+        
+  $properties = Property::where("payment_id",$payment_id)->where("broker_id",$user->id)->orderBy("id","desc")->get();
+          
+          
+          
+          
+    $total_submitted_property_with_new_order=count(    $properties);
+    
+     
+    
+   $available_listing=$total_property_submission-  $total_submitted_property_with_new_order; 
+    
+		}
+          
+      
+        
+        function getCurrency()
+        {
+            
+            $currency_array=array("USD","AED","INR","BTC","ETH","GBP");
+            
+            return   $currency_array;
+            
+        }
+        
+      
+        
+        function getLeadTags()
+        {
+            
+            
+        
+            $lead_tags=DotenvEditor::getValue('LEAD_TAGS'); 
+        
+         
+            
+            return   $lead_tags;
+            
+        }
+        
+        function getLeadStatus()
+        {
+            
+            
+        
+            $lead_status=DotenvEditor::getValue('LEAD_STATUS'); 
+        
+         
+            
+            return   $lead_status;
+            
+        }
+        
+        
 									     
 									     

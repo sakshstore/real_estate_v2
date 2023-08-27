@@ -130,24 +130,7 @@ var formRenderInstance = $('#render-container').formRender( {  formData});
                             */
                             
                                                     
-  var connectivity_tags = document.querySelector('.connectivity_tags');
-  
-console.log(connectivity_tags);
-
  
-     var connectivity_tags_values = [@php echo '"'.implode('","', $connectivity_array).'"' @endphp];
- 
-    // init Tagify script on the above inputs
-    connectivity_tagify = new Tagify(connectivity_tags, {
-      whitelist: connectivity_tags_values,
-        maxTags             :1, mode : "select",
-      dropdown: {
-               
-        classname: "tags-look",  
-        enabled: 0,             // <- show suggestions on focus
-        closeOnSelect: true    // <- do not hide the suggestions dropdown once an item has been selected
-      }
-    })
     
     
     

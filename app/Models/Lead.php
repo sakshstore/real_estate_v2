@@ -28,7 +28,7 @@ class Lead extends Model
 		'name' => 'required',
 		'email' => 'required',
 		'phone' => 'required',
-		'service_id' => 'required',
+		'property_id' => 'required',
 		'user_id' => 'required',
 		'ip_address' => 'required',
 		'request_url' => 'required',
@@ -41,7 +41,7 @@ class Lead extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','email','phone','service_id','user_id','ip_address','request_url','timezone','refer'];
+    protected $fillable = ['name','email','phone','property_id','user_id','ip_address','request_url','timezone','refer'];
 
 
 

@@ -1,4 +1,4 @@
-@extends('layouts.website_layout')
+@extends('layouts.page')
  
 
 @section('title')
@@ -7,15 +7,21 @@
 
 @section('content')
      
-                        
+  {!! $page->html !!}
+                     
                
-               
-                     
-                     
-                     
-                            {!! $page->content !!}
-                     
-                     
-
 
 @endsection
+ 
+
+
+@section('styles')
+     <style>
+     
+     
+     {!! $page->css !!} 
+     
+     
+     </style> 
+@endsection
+ 

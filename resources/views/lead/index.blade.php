@@ -132,68 +132,12 @@
 
 
 
-
- 
-  var status_tags_input = document.querySelector('.status_tags');
-  
-  var status_tags_values = ["success","in process","ended" ];
- 
- 
-  
-    
-  tagify = new Tagify(status_tags_input, {
- 
-      whitelist: status_tags_values,
-      dropdown: {
-        classname: "tags-look",  
-        enabled: 0,             // <- show suggestions on focus
-        closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
-      }
- 
-    });
  
  
 
 });
 
- 
-function set_lead_status11(lead_id,status )
-{
-    
- 
-   $.ajaxSetup(
-   {
-      headers:
-      {
-         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-   });
-   $.ajax(
-   {
-      url: " lead_id=" + lead_id + '&status='+status,
-      type: "post",
-      dataType: 'json',
-      success: function(res)
-      {
-          
-          
-          console.log(res);
-          console.log(res.contents);
-          $('#ajax_response').val(res.message) ;
-          
-     
-     
-          
-          
-      },
-      error: function(data)
-      {
-         console.log('Error:', data);
-      }
-   });
    
- 
-}
 
 
 </script>

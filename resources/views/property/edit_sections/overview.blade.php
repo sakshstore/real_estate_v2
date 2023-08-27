@@ -41,41 +41,46 @@
   <input type="text" class="form-control" id="location" value="{{ $property->location }}" name="location"  >
 </div>
 
-@php
-
-$price=json_decode($property->starting_price);
+  
  
-if(isset($price->aed))
-{
-$price_aed=$price->aed;
-$price_usd=$price->usd;
-
-}
-
-else
-
-{
-
-$price_aed=0;
-$price_usd=0;
-}
-
  
-@endphp
+ 
+ <?php
+  
+  $starting_price=json_decode( $property->starting_price );
+  
+  
+ 
+  
+ foreach( $currency_array as $currency)
+ 
+ {
+ 
+    $value=0;
+ if(isset($starting_price->$currency))
+ 
+ {
+     
+     $value= $starting_price->$currency;
+ } 
+ 
+ 
+ ?>
  
 									   <div class="mb-3">
-  <label for="starting_price" class="form-label">Starting Price (In AED ) </label>
-  <input type="text" class="form-control" id="starting_price"  value="{{ $price_aed }}" name="starting_price[aed]"  >
+  <label for="starting_price" class="form-label">Starting Price (In {{$currency}} ) </label>
+  <input type="text" class="form-control" id="starting_price_{{$currency}}"  value="{{$value}}" name="starting_price[{{$currency}}]"  >
 </div>
  
+ 
+ <?php 
+  
+  
+ 
+ }
 									    
-							 
-									  
- 
-									   <div class="mb-3">
-  <label for="starting_price" class="form-label">Starting Price (In USD ) </label>
-  <input type="text" class="form-control" id="starting_price"  value="{{ $price_usd }}" name="starting_price[usd]"  >
-</div>
+?>							 
+									   
  
 									    
 							 
@@ -156,15 +161,7 @@ $price_usd=0;
                                         
                                     
                                     
-                                    
-                                    
-                                         <div class="mb-3">
-  <label for="broker" class="form-label">Broker</label>
-  
-   <input type="text" class="form-control" id="size_from" name="broker_id"  value="{{ $property->broker_id }}"   >
- 
-</div>   
-                              
+                                        
                             
                             
   <label for="floor_details" class="form-label">Floor details</label>

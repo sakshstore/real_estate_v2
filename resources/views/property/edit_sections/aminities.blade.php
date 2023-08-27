@@ -1,9 +1,9 @@
-     ddd<form method="POST" action="{{ route('aminities_update', $property->id) }}"  role="form" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('aminities_update', $property->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
                             
                             
-                            
+                            {{ $property->aminities }}
   <label for="aminities" class="form-label">Aminities</label>
   
   
@@ -17,4 +17,4 @@
     </div>
     
     
- </form>ddddd
+ </form> 

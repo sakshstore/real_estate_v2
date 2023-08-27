@@ -11,12 +11,12 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Tags\HasTags;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\hasOne;
 use App\Models\Post;
 use App\Models\Subscriber;
 use App\Models\LoginHistory;
 
-
-
+use Illuminate\Database\Eloquent\Relations\HasOneThrough; 
 
 class User extends Authenticatable  implements MustVerifyEmail
 {
@@ -32,7 +32,7 @@ class User extends Authenticatable  implements MustVerifyEmail
         'email',
         'last_login_at',
         'last_login_ip','form_json','mobile',
-        'password',
+        'password', 'subscription_id'
     ];
 
     /**
@@ -71,12 +71,11 @@ class User extends Authenticatable  implements MustVerifyEmail
     }
     
     
-    
-    
-            public function subscriber(): hasOne
+        public function orders(): HasMany
     {
-        return $this->hasOne(Subscriber::class);
+        return $this->hasMany(Order::class,"broker_id");
     }
+    
     
     
     
@@ -85,6 +84,12 @@ class User extends Authenticatable  implements MustVerifyEmail
         public function  login_histories(): HasMany
     {
         return $this->hasMany(LoginHistory::class );
+    }
+     
+    
+        public function subscription(): HasOne
+    {
+        return $this->hasOne(Subscription::class);
     }
     
     

@@ -11,10 +11,7 @@
  
              
                                 
-                                
-                                                            
-<section class="posts-subscription">
-        <div class="container">
+                                 
             <div class="row">
                 
 
@@ -73,8 +70,12 @@
  <input type="hidden" name="broker_id" value="{{$user->id}}"  / >
  <input type="hidden" name="plan_id" value="{{$subscription->id}}" />
   
+  @if($subscription->amount >0 )
         <button type="submit" class="btn btn-primary w-100 mt-5 mb-5">Pay with PayPal</button>
- 
+        @else
+        <a  href="{{route('home')}}" class="btn btn-primary w-100 mt-5 mb-5">Use Free</a>
+        
+ @endif
  
  </form>
             
@@ -94,12 +95,7 @@
                     
  
                 </div>
-            </div>
-        </div>
-    </section>  
-                                        
-
- 
+            </div> 
  
 
 
