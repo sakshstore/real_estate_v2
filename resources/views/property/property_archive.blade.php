@@ -15,32 +15,7 @@
                  
  <div class="container">
      
-     
-     
- <div class="filter_button mt-5">
-
-  <a class="btn btn-primary" href="{{route('query_property',
-  'all')}}" role="button">All</a>
-  <a class="btn btn-primary" href="{{route('query_property',
-  'Apartment')}}" role="button">Apartment</a>
-  <a class="btn btn-primary" href="{{route('query_property',
-  'Duplexes')}}" role="button">Duplexes</a>
-  <a class="btn btn-primary" href="{{route('query_property',
-  'Loft Apartments')}}" role="button">Loft Apartments</a>
-  <a class="btn btn-primary" href="{{route('query_property',
-  'Hotel Apartments')}}" role="button">Hotel Apartments</a>
-  <a class="btn btn-primary" href="{{route('query_property',
-  'Penthouses')}}" role="button">Penthouses</a>
-  <a class="btn btn-primary" href="{{route('query_property',
-  'Villas')}}" role="button">Villas</a>
-  <a class="btn btn-primary" href="{{route('query_property',
-  'Townhouses')}}" role="button">Townhouses</a>
-
-
-  
-   
-
-</div> 
+ 
                  
  <div class="row">
           

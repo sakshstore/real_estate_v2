@@ -102,6 +102,8 @@
 
 <li  > <a href="{{ route('customforms.index') }}"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-wpform"></i></div> Custom forms</a></li>
 
+<li  > <a href="{{ route('blocks.index') }}"   class="nav-link"   > <div class="sb-nav-link-icon"><i class="fa-solid fa-wpform"></i></div>   blocks</a></li>
+
                  @endrole 
                
                  

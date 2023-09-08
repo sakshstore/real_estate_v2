@@ -22,36 +22,9 @@
           
           
   
-              <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="{{ route('propertyarchive') }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Properties
-          </a>
-          <ul class="dropdown-menu">
-     
-            
-            
-            
-                <li  >    <a class="dropdown-item" href="{{route('query_property',
-  'top_property')}}"  >Top property</a></li>
   
-  
-     <li  > <a class="dropdown-item" href="{{route('query_property',
-  'urgent_property')}}"  >Urgent property</a></li>
-  
-  
-     <li  > <a class="dropdown-item" href="{{route('query_property',
-  'featured_property')}}"  >Featured property</a></li>
-  
-  
-  
-  
-          </ul>
-        </li>
 
 
-
-       <li class="nav-item"><a href="{{ route('login') }}"   class="nav-link" >Register as broker</a></li>
-      
       
              <li class="nav-item"><a href="{{ route('our_brokers') }}"   class="nav-link" >Our brokers</a></li>
       
@@ -69,3 +42,6 @@
     </div>
   </div>
 </nav>
+
+
+ 

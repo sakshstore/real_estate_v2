@@ -384,9 +384,13 @@
                        	     <h5 class="text-heading mb-4">map</h5>
                        	     
                        	     
-                       	    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28881.42151956457!2d55.25914763476562!3d25.19722950000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f682829c85c07%3A0xa5eda9fb3c93b69d!2sDubai%20Mall!5e0!3m2!1sen!2sin!4v1689413677078!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                       	      
+                       	  
  
+                                           
+ <iframe
+                      src="//www.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q={{ $property->latitude }} , {{ $property->longitude }}&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"  width="600" height="450" 
+                      class="border-0 map-iframe" allowfullscreen="" aria-hidden="false" tabindex=""></iframe>
+                      
 								</div>
 							</div>
 							

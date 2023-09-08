@@ -51,17 +51,17 @@ font-family: 'Roboto Condensed', sans-serif;
             
         </style>
      
-            
+       
+                 
+                    <meta name="csrf-token" content="{{ csrf_token() }}" />        @livewireStyles 
 </head>
 <body>
  
  
  
-    @include('layouts.partials.navbar')
-    
+    @include('layouts.partials.navbar') 
                                                                                                        
-                                                                                                                                                                
-                                                                                                                                                                                                                
+                                                 
                                                                                                             
     
     <main  class="saksh_contents">
@@ -139,6 +139,177 @@ font-family: 'Roboto Condensed', sans-serif;
                 */
                 </script>  
   
+      
+      
   
+                   
+               <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+ 
+
+   
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+  <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+ 
+       <script> 
+       
+       
+       
+       
+    //   tagify location
+      var location_input = document.querySelector('.locations');
+  
+ 
+     var location_input_values = ["kanpur", "mumbai","delhi" ];
+ 
+  
+   make_tagify(location_input,location_input_values);
+  
+    
+    
+     
+        
+  
+   make_tagify(document.querySelector('.rent_sell'),["rent", "sell","both" ]);
+   
+   
+   make_tagify(document.querySelector('.bedrooms'),["studio", "1","2","3","4","5" ]);
+   make_tagify(document.querySelector('.bathrooms'),["1", "1.5","2","3","4","5" ]);
+   
+   
+   
+  var home_type_values=["Houses","Townhomes","Multi-family","Condos/Co-ops ","Lots/Land ","Apartments","Manufactured"]
+   
+   make_tagify(document.querySelector('.home_type'),home_type_values);
+   
+   
+   
+    function make_tagify(selector,values)
+    {
+
+     
+    tagify = new Tagify(selector, {
+      whitelist: values,
+      
+      dropdown: {
+               
+        classname: "tags-look",  
+        enabled: 0,             // <- show suggestions on focus
+        closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+      }
+    })
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+     
+$(document).ready(function(){
+
+
+
+ 
+
+    function filter_data()
+    {   
+        
+        
+       var data_obj=  $("#search_form").serializeArray();
+
+
+ 
+    
+            
+    
+   $.ajaxSetup(
+   {
+      headers:
+      {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
+   
+   
+   
+        $.ajax({
+            url: "{{route('search_property')}}",
+            method:"POST",
+            data: data_obj,
+            success:function(data){
+                
+                console.log(data);
+             table=   arrayToTable(data);
+                $('.filter_data').html(table);
+            }
+        });
+       
+        
+    }
+
+   
+    
+
+    $('.common_selector').click(function(event){
+        
+  event.preventDefault();
+ 
+
+
+
+
+      filter_data();
+    });
+    
+     
+
+
+
+});
+ function arrayToTable(tableData) {
+    var table = $('<table></table>');
+    
+    
+    
+    
+    $(tableData).each(function (i, rowData) {
+        
+        
+        
+        var row = $('<tr></tr>');
+        
+        
+        $(rowData).each(function (j, cellData) {
+            
+            
+            row.append($('<td>'+cellData.id+'</td>'));
+            
+            row.append($('<td>'+cellData.project_name+'</td>'));
+            
+            row.append($('<td>'+cellData.property_type+'</td>'));
+            
+            row.append($('<td>'+cellData.address+'</td>'));
+            
+            row.append($('<td>'+cellData.unit_details+'</td>'));
+            
+            row.append($('<td>'+cellData.property_thumbnail_url+'</td>'));
+            
+            
+        });
+        
+        
+        
+        
+        table.append(row);
+    });
+    return table;
+}
+
+
+ 
+          </script>      @livewireScripts
   </body>
 </html>

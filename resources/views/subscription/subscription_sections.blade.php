@@ -33,7 +33,7 @@
               <li>Email support</li>
               <li>Help center access</li>
             </ul>
-          <a href="{{ route('register_as_broker') }}"   class="nav-link" >     <button type="button" class="w-100 btn btn-lg btn-outline-primary">Register as Broker</button></a>
+          <a href="{{ route('login') }}"   class="nav-link" >     <button type="button" class="w-100 btn btn-lg btn-outline-primary">Register as Broker</button></a>
             
             
           

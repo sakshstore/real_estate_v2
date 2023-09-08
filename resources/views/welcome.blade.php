@@ -39,143 +39,15 @@
                        
                        
                        
-                       
-                       
-    
-    <section class="unique_point">
-        <div class="container">
-            <div class="row">
-                <div class="col-6 col-md-3">
-                    <div class="unique_point_box">
-
-                        <div class="unique_point_img">
-                            <img src="{{asset('home/genuine-listing.png')}}">
-                        </div>
-                        <h3>Authentic Property
-</h3>
-                    </div>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="unique_point_box">
-                        <div class="unique_point_img">
-                            <img src="{{asset('home/direct-from-developer.png')}}">
-                        </div>
-                        <h3>Straight from the Builder
-</h3>
-                    </div>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="unique_point_box">
-                        <div class="unique_point_img">
-                            <img src="{{asset('home/zero-commission.png')}}">
-                        </div>
-                        <h3>No Extra Charges
-</h3>
-                    </div>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="unique_point_box">
-                        <div class="unique_point_img">
-                            <img src="{{asset('home/zero-hidden-cost.png')}}">
-                        </div>
-                        <h3>No Surprises
-</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-<section class="about-us-section">
-        <div class="container">
-            <div class="row">
-                
-
-                <div class="col-md-6">
-                    <div class="whoweare-pic"><img class="img-fluid" src="{{asset('home/about-us-pic.png')}}"></div>
-                </div>
-
-                <div class="col-md-6">
-
-                    <div class="text-heading">
-                        <h2 class="title-text">About Us</h2>
-                    </div>
-                    <div class="whoweare-pera">
-                      
-                      
+                                        
+           <livewire:search-properties />    
+           
+           
                         
-                        {!!  get_page("about-us")->content !!}
-                        
-
-
-                    </div>
-                    
  
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    
-   
-                       
-        
-<section class="popular-listing-section">
-        <div class="container">
-            <div class="row">
-                
-
-               
-
-                <div class="col-md-12">
-
-                    <div class="text-heading">
-                        <h2 class="title-text">  Popular listing</h2>
-                    </div>
-                    <div class="whoweare-pera">
-                     
-                  
-       @include('property.property_section',['properties' => $popular_properties])
-                        
-
-
-                    </div>
-                    
- 
-                </div>
-            </div>
-        </div>
-    </section>
     
               
-<section class="posts-subscription">
-        <div class="container">
-            <div class="row">
-                
-
-               
-
-                <div class="col-md-12">
-
-                    <div class="text-heading">
-                        <h2 class="title-text">Subscription</h2>
-                    </div>
-                    <div class="whoweare-pera">
-                      
-                    
-       @include('subscription.subscription_sections',['subscriptions' => $subscriptions])
-                         
-
-                    </div>
-                    
- 
-                </div>
-            </div>
-        </div>
-    </section>                
+             
         
 <section class="posts-section">
         <div class="container">
@@ -203,35 +75,7 @@
         </div>
     </section>
                        
-        
-<section class="team-section">
-        <div class="container">
-            <div class="row">
-                
-
-               
-
-                <div class="col-md-12">
-
-                    <div class="text-heading">
-                        <h2 class="title-text">  Our Team</h2>
-                    </div>
-                    <div class="whoweare-pera">
-                      
-                      
-                        
-                  
-       @include('team.team_section',['teams' => $teams])
-                        
-
-
-                    </div>
-                    
  
-                </div>
-            </div>
-        </div>
-    </section>
     
     
     
@@ -259,84 +103,7 @@
             </div>
         </div>
     </section>
-    
-    
-    
-<section class="faqs-section">
-        <div class="container">
-            <div class="row">
-                
-                
-                <div class="col-md-12">
-
-                    <div class="text-heading">
-                        <h2 class="title-text">  Popular faqs</h2>
-                    </div>
-                    <div class="whoweare-pera">
-                      
-                      
-                        
-                  
-       @include('faq.faqs',['faqs' => $faqs])
-                        
-
-
-                    </div>
-                    
- 
-                </div>
-            </div>
-        </div>
-    </section>
-    
-   <section id="contact-form"  >
-        <div class="container">
-            
-            
-             <div class="row">
-                 
-                 
-                 
-                <div class="text-heading">
-                    <h2 class="title-text">INTERESTED TO KNOW MORE?</h2>
-                </div>
-                
-                    </div>
-                
-                
-            <div class="row">
-                
-                <div class="col-lg-6 col-md-6"   > 
-                      
-                  
-                <div class="contact_form "   > 
-                      
-                   
-                        <h3>To know more, schedule a meeting with us to discuss your investment.</h3>
-              
- 
-    @include('layouts.partials.messages')
-  
-    
-       @include('property.call_back_form',['property_id'=>0])
-                         
-                   
-                     
-                </div>
-
-                    
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="contact-form-pic ">
-                        <img src="{{asset('home/contact-form-pic.jpg')}}">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> 
-    
-    
+      
 
 
 
@@ -385,31 +152,7 @@
         </div>
     </section>
       
-<section class="subscriber-section">
-        <div class="container">
-            <div class="row">
  
-                <div class="col-md-12">
-
-                    <div class="text-heading">
-                        <h2 class="  title-text">  Subscribe new propertiy informations</h2>
-                    </div>
-                    <div class="whoweare-pera">
-                      
-               
-                        
-                  
-       @include('subscriber.subscriber_section' )
-                        
-
-
-                    </div>
-                    
- 
-                </div>
-            </div>
-        </div>
-    </section>
     
 @endsection
 

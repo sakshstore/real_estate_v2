@@ -50,6 +50,12 @@
     
      
  
+      <div class="footer_section">
+ 
+   
+    @include('layouts.partials.footer')
+  
+</div> 
  
  
 

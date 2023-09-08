@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.page')
  
 
 @section('title')
@@ -12,67 +12,7 @@
                
                      
                       
-                     
-                     
-
-<section class="testimonials-section">
-        <div class="container">
-            <div class="row">
-                
-
-       
-
-                <div class="col-md-12">
-
-                    <div class="text-heading">
-                        <h2 class="pt-5"> Testimonials</h2>
-                    </div>
-                    <div class="whoweare-pera">
-                       
-                  
-       @include('testimonial.testimonials_section',['testimonials' => $testimonials])
-                        
-
-
-                    </div>
                     
- 
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    
-    
-    
-<section class="faqs-section">
-        <div class="container">
-            <div class="row">
-                
-
-               
-
-                <div class="col-md-12">
-
-                    <div class="text-heading">
-                        <h2 class="pt-5">  Popular faqs</h2>
-                    </div>
-                    <div class="whoweare-pera">
-                      
-                      
-                        
-                  
-       @include('faq.faqs',['faqs' => $faqs])
-                        
-
-
-                    </div>
-                    
- 
-                </div>
-            </div>
-        </div>
-    </section>
     
    <section id="contact-form"  >
         <div class="container">
@@ -120,6 +60,44 @@
             </div>
         </div>
     </section> 
+    
+    
+    
+    
+     
+ 
+    
+    
+    
+    
+<section class="faqs-section">
+        <div class="container">
+            <div class="row">
+                
+
+               
+
+                <div class="col-md-12">
+
+                    <div class="text-heading">
+                        <h2 class="pt-5">  Popular faqs</h2>
+                    </div>
+                    <div class="whoweare-pera">
+                      
+                      
+                        
+                  
+       @include('faq.faqs',['faqs' => $faqs])
+                        
+
+
+                    </div>
+                    
+ 
+                </div>
+            </div>
+        </div>
+    </section>
     
 
 @endsection

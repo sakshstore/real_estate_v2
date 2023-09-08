@@ -15,12 +15,13 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Str;
 use App\Models\Property;
 use App\Models\Post;
+use App\Models\Block;
 use App\Models\Team;
 
 use App\Models\Testimonial;
 use App\Models\Subscription;
 
-
+use Illuminate\Support\Facades\Storage;
 /**
  * Class PageController
  * @package App\Http\Controllers
@@ -358,8 +359,34 @@ $page ->delete();
            
         }
         
+        $block_s=array();
+        
+        
+        
+        $blocks = Block::all();
+        
+        // return $blocks;
+  
+        foreach($blocks as $block)
+        {
+            
+            
+             
+        
+    //$path = storage_path($block['file']);
          
-        return view('page.load_editor', compact('page'));
+        
+        
+   // $block['content']= file_get_contents($path);
+       
+         
+        
+        
+        $block_s[]=$block;
+           
+        }
+        
+         return view('page.load_editor', compact('page','block_s'));
     }
     
     

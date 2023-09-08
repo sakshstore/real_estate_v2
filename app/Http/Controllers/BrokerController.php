@@ -39,146 +39,23 @@ class BrokerController extends Controller
     }
   public function our_brokers()
     {
-        $brokers = Broker::paginate();
+         
 
+    $brokers = User::role('Executive')->paginate(); 
+        
+        
+        
+        
         return view('broker.our_brokers', compact('brokers'))
             ->with('i', (request()->input('page', 1) - 1) * $brokers->perPage());
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function register_as_broker()
-    {
-        //$flight = Flight::where('number', 'FR 900')->first();
-         
-      $customform=  Customform::where("form_name","broker_registration")->first();
-        
-        
-         $broker = new Broker();
-        return view('broker.register_as_broker', compact('broker','customform'));
-    } 
+ 
     
     
     
-    
-     public function validate_broker_registeration(Request $request)
-    {
-        
- $request->validate(Broker::$rules);
-
-  // $request->validate('email:rfc,dns');
-    
-        $broker = Broker::where( "email", $request->email)->first();
-        
-        
-        if($broker)
-        
-        {
-            $msg= "Email already registered";
-            
-        }
-       else{
-           
-                        $msg= "Email available for registeration";
-       }
-     
-     
-     return response()->json([
-  "message"=> $msg
-]);
-
-
-}
-    
-     public function register_as_broker_post(Request $request)
-    {
-  // $request()->validate(Broker::$rules);
-
-    /*
-   
-       
-        
- $broker=new Broker();
-
-// $broker->order_id="SAKSH_".rand(100,300)."_".rand(100,300)."_".rand(100,300)."_".rand(100,300);
-
-
-
-
- $broker->company_name=$request->company_name;
-
- $broker->registeration_number=$request->registeration_number;
-
- $broker->phone=$request->phone;
-
- $broker->date_of_birth=$request->date_of_birth;
-
- $broker->address=$request->address;
-
- $broker->city=$request->city;
-
- $broker->state=$request->state;
-
- $broker->country=$request->country;
-
- $broker->pin=$request->pin;
-
- $broker->referral=$request->referral;
-
- $broker->selected_plan=$request->selected_plan;
-
- $broker->annual_earning=$request->annual_earning;
-
- $broker->total_experience=$request->total_experience;
-
- $broker->form_json=$request->total_experience;
-
- $broker->timezone=$request->timezone;
   
- $user=Auth::user();
+    
  
- $broker->user_id=100;
- */
- 
- 
-        
-	$user=	Auth::user();
-        
-            
-      $request_data=$request->except('_method', '_token')  ;
-       
-       
-       $user->form_json=json_encode($request_data);
-              
-             
- $user->name=$request->name;
- 
-
- $user->mobile=$request->mobile; 
-              
- 
-       $user->save();
-        
-   
-         
-        
-       $subscriptions = Subscription::all();
-
-       
-        
-      
-
-        return  view('paypal.index',compact('user','subscriptions' ))
-            ->with('success', 'Broker created successfully.');
-
-
-
-       // return view('broker.create', compact('broker'));
- 
-    }
-
 
 
 
@@ -189,6 +66,8 @@ class BrokerController extends Controller
      */
     public function create()
     {
+        
+        return "";
         $broker = new Broker();
         return view('broker.create', compact('broker'));
     }
@@ -207,7 +86,7 @@ class BrokerController extends Controller
         
         
         
-        
+        return "";
         
 	$user=	Auth::user();
         
@@ -273,20 +152,22 @@ class BrokerController extends Controller
      */
     public function show(Broker $broker)
     {
-        //$broker = Broker::find($id);
+         
 
         return view('broker.show', compact('broker'));
     }
 
 
 
-    public function get_broker($email)
+    public function get_broker(User $user)
     {
-        $broker = Broker::where( "email",$email)->first();
+      
         
+       $broker=$user;
+       
+    
         
-        
-       $properties= Property::where('broker_id',$broker->id)->where("status","Published")->get();
+       $properties= Property::where('broker_id',$user->id)->where("status","Published")->get();
     
     
     
@@ -304,7 +185,7 @@ class BrokerController extends Controller
      */
     public function edit(Broker $broker)
     {
-      //  $broker = Broker::find($id);
+      return "";
 
         return view('broker.edit', compact('broker'));
     }
@@ -318,6 +199,7 @@ class BrokerController extends Controller
      */
     public function update(Request $request, Broker $broker)
     {
+       return "";
        // request()->validate(Broker::$rules);
 
         $broker->update($request->all());
@@ -335,7 +217,7 @@ class BrokerController extends Controller
     {
         //$broker = Broker::find($id)->delete();
 
-
+ return "";
 $broker ->delete();
         return redirect()->route('brokers.index')
             ->with('success', 'Broker deleted successfully');
@@ -345,7 +227,7 @@ $broker ->delete();
     
        public function process_broker_request(Broker $broker  )
     {
-       
+        return "retquire to test ";
 $broker ->status="accepted";
 $broker ->save(); 
 

@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
  
 use App\Models\Customform;
 use App\Models\Subscription;
-
+use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Models\Faq;
@@ -30,6 +30,99 @@ class PropertyController extends Controller
     
     
     
+    function search_property(Request $request){
+  
+  
+  
+  
+        //$properties = Property::where("user_id",$user_id)->orderBy("id","desc")->paginate();
+        
+        
+        
+   $qr=array();
+        
+  $qr_ar=array("status ='published'");
+  
+            
+            
+            
+            
+         $qr_ar[]=$this->build_query_section( "location",$request->locations);
+        
+        
+        
+            
+            
+         $qr_ar[]=$this->build_query_section( "property_type",$request->rent_sell);
+          
+          
+          $qr_ar[]=$this->build_query_section( "bedrooms",$request->bedrooms);
+            
+           
+         $qr_ar[]=$this->build_query_section( "bathrooms",$request->bathrooms);
+           
+           
+           
+         
+        // $qr_ar[]=$this->build_query_section( "type",$request->home_type);
+            
+            $where=implode(" and ",$qr_ar);
+            
+           $price= " and starting_price <= " .$request->maximum_price ." and starting_price >=".$request->minimum_price;
+            
+            
+      
+           
+           $res =  " select * from properties where ".   $where .$price ;
+    
+      
+           
+           $res =  " select * from properties   ";
+    
+    
+    $property=DB::SELECT($res);
+    
+    return $property;
+           
+           
+         
+        return json_encode($qr_ar);
+        
+   return $request->location;
+ 
+        
+    }
+    
+    
+    function build_query_section( $type,$tags)
+    {
+       $array= get_value_array_from_tag($tags);
+       
+       
+       $or_section=array();
+         
+        foreach($array as $ar)
+        {
+            
+             
+            $or_section[] = $type."  like '%".$ar."%'   ";
+            
+        }
+        
+        
+           $where=implode(" or ",$or_section);
+            
+         
+         $where="( ". $where . ")";
+         
+         
+         
+        
+        return $where;
+        
+         
+    }
+    
     function test1(){
   
   $user=User::find(109);
@@ -37,9 +130,9 @@ class PropertyController extends Controller
         Auth::login($user);
     
     
-   return  available_listing(  $user);
-    
-      
+ return redirect()->route('properties.index' )
+          ->with('success', 'Property created successfully.');
+ 
         
     }
     /*

@@ -43,6 +43,7 @@ use App\Http\Controllers\CustomformController;
 use App\Http\Controllers\OrderController;
 
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\BlockController;
 
 
 /*
@@ -77,12 +78,21 @@ use App\Http\Controllers\PayPalController;
      Route::post('save_editor',[ PageController::class,'save_editor'])->name("save_editor") ;
     
  
+ Route::get('page/{page:slug}',  [PageController::class, 'get_page_by_slug'])->name('get_page_by_slug'); 
+    
 
 Route::get('/test1', [PropertyController::class, 'test1'])->name('test1');
 
 
 
+ 
+Route::view('login_with_otp', 'auth.login_with_otp')
+->name('register_as_broker');
+ 
 Route::get('/property/{property}', [PropertyController::class, 'viewProperty'])->name('viewProperty');
+
+
+Route::post('c', [PropertyController::class, 'search_property'])->name('search_property');
 
 
 Route::get('/archive', [PropertyController::class, 'propertyarchive'])->name('propertyarchive');
@@ -98,16 +108,16 @@ Route::get('/contact_us', [PageController::class, 'contact_us'])->name('contact_
   Route::get('blog/{post}',[ PostController::class,'get_post'])->name("get_post") ;
     
  
-Route::get('register_as_broker',[ BrokerController::class,'register_as_broker'])->name("register_as_broker") ;
+//Route::get('register_as_broker',[ BrokerController::class,'register_as_broker'])->name("register_as_broker") ;
 
-  Route::get('broker/{email}',[ BrokerController::class,'get_broker'])->name("get_broker") ;
+  Route::get('broker/{user:email}',[ BrokerController::class,'get_broker'])->name("get_broker") ;
     
  
 
-Route::post('register_as_broker_post',[ BrokerController::class,'register_as_broker_post'])->name("register_as_broker_post") ;
+//Route::post('register_as_broker_post',[ BrokerController::class,'register_as_broker_post'])->name("register_as_broker_post") ;
 
  
-  Route::post('validate_broker_registeration',[ BrokerController::class,'validate_broker_registeration'])->name("validate_broker_registeration") ;
+ // Route::post('validate_broker_registeration',[ BrokerController::class,'validate_broker_registeration'])->name("validate_broker_registeration") ;
     
  
  
@@ -126,8 +136,6 @@ Route::post('verify_login_with_otp', [AuthController::class, 'verify_login_with_
     
     
     
-    
- Route::get('page/{page:slug}',  [PageController::class, 'get_page_by_slug'])->name('get_page_by_slug'); 
     
  Route::get('page/{page}',  [PageController::class, 'get_page_by_id'])->name('get_page_by_id'); 
     
@@ -342,7 +350,13 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     Route::resource('posts', PostController::class) ;
     
     
+    Route::resource('blocks', BlockController::class) ;
     
+    
+     
+      Route::post('update_avatar_block/{block}',[ BlockController::class,'update_avatar_block'])->name("update_avatar_block") ;
+    
+     
     Route::resource('auto_posts', AutoPostController::class) ;
     
     
@@ -362,7 +376,7 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
     Route::resource('teams', TeamController::class) ;
     
-    Route::resource('brokers', BrokerController::class) ;
+   // Route::resource('brokers', BrokerController::class) ;
     
      
       Route::post('update_avatar/{team}',[ TeamController::class,'update_avatar'])->name("update_avatar") ;
@@ -378,7 +392,7 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
      
      
-      Route::post('update_avatar_broker/{broker}',[ BrokerController::class,'update_avatar_broker'])->name("update_avatar_broker") ;
+  //    Route::post('update_avatar_broker/{broker}',[ BrokerController::class,'update_avatar_broker'])->name("update_avatar_broker") ;
     
     
      
@@ -387,7 +401,7 @@ Route::post('remove_carousel_image', [PropertyController::class, 'remove_carouse
     
     
 
-      Route::get('process_broker_request/{broker}',[ BrokerController::class,'process_broker_request'])->name("process_broker_request") ;
+     // Route::get('process_broker_request/{broker}',[ BrokerController::class,'process_broker_request'])->name("process_broker_request") ;
     
     
      

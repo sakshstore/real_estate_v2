@@ -39,8 +39,7 @@
     @include('layouts.partials.navbar')
  
 
-
-
+ 
 
   <div class="container  ">
 
@@ -90,5 +89,6 @@
 
 
       
+       
   </body>
 </html>
